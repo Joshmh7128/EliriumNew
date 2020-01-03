@@ -4,20 +4,9 @@ using UnityEngine;
 
 public class PuzzlePartScript : MonoBehaviour
 {
-    [Tooltip("List of animations that this puzzlePart can do, based on what color orb is used")] public List<Animation> actions;
+    [Tooltip("List of animation names that this puzzlePart can do, based on what color orb is used")] public List<string> actions;
     [Tooltip("The pedestal that activates this puzzlePart")] public GameObject pedestal;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Tooltip("The animator attached to this puzzlePart")] public Animator animator;
 
     public void Activate(int OrbColor)
     {
@@ -25,6 +14,7 @@ public class PuzzlePartScript : MonoBehaviour
         {
             //Play animation with key OrbColor from dict actions
             Debug.Log("playAnimation" + OrbColor);
+            animator.SetTrigger(actions[OrbColor]);
         }
         else
         {
