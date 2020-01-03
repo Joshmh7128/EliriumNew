@@ -5,7 +5,7 @@ using UnityEngine;
 public class OrbScript : MonoBehaviour
 {
     public Transform holdPoint;        //get the point at which we'll be held
-    public Rigidbody rigidbody; //get the orb's rigidbody
+    public Rigidbody orbRigidBody; //get the orb's rigidbody
     public bool isHeld;         //are we being held?
     public Material redMat, greenMat, blueMat, orangeMat;
     public enum orbColorList{ None, Red, Green, Blue, Orange }; //what color is our orb?
@@ -17,6 +17,7 @@ public class OrbScript : MonoBehaviour
     private void Awake()
     {
         transform.parent = null;
+        orbRigidBody = gameObject.GetComponent<Rigidbody>();
     }
 
     public void Start()
@@ -56,15 +57,15 @@ public class OrbScript : MonoBehaviour
     {
         if (isHeld)
         {
-            Vector3 direction = holdPoint.position - rigidbody.position;
-            rigidbody.velocity = (direction * Time.fixedDeltaTime * 1000f);
+            Vector3 direction = holdPoint.position - orbRigidBody.position;
+            orbRigidBody.velocity = (direction * Time.fixedDeltaTime * 1000f);
         }
     }
 
     public void ResetPos()
     {
         transform.position = startPos;
-        rigidbody.velocity = new Vector3(0, 0, 0);
+        orbRigidBody.velocity = new Vector3(0, 0, 0);
     }
 
 }
