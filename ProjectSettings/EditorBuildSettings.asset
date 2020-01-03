@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Concepts/Caves/Chunk 1 Concept.unity
-    guid: a3a0fcaa72556bf4fabc363d3743f364
+    path: Assets/Scenes/Concepts/Caves/Chunk 3 Concept.unity
+    guid: 8cf37df6cf6e2934b83ee41367858ee3
   m_configObjects: {}
