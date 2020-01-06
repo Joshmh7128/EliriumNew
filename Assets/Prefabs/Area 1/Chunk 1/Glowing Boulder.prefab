@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 7687510915189504367}
   - component: {fileID: 7687510915189504366}
   - component: {fileID: 7687510915189504365}
+  - component: {fileID: 3307973328075605632}
   m_Layer: 0
   m_Name: Glowing Boulder
   m_TagString: Untagged
@@ -2367,3 +2368,17 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 71000000
+--- !u!64 &3307973328075605632
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7687510915189504363}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 0}

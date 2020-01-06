@@ -20,7 +20,15 @@ public class PuzzlePartScript : MonoBehaviour
             //Play animation with key OrbColor from dict actions
             Debug.Log("playAnimation" + OrbColor);
             //animator.SetTrigger(actions[OrbColor]);
-            target = actions[OrbColor];
+            if  (actions[OrbColor] == new Vector3(-999,-999,-999))
+            {
+                target = transform.position;
+            }
+            else
+            {
+                target = actions[OrbColor];
+            }
+            
         }
         else
         {
