@@ -26,7 +26,7 @@ public class PuzzlePartScript : MonoBehaviour
             }
             else
             {
-                target = actions[OrbColor];
+                StartCoroutine(Move(OrbColor));
             }
             
         }
@@ -38,6 +38,12 @@ public class PuzzlePartScript : MonoBehaviour
 
     private void Update()
     {
-        transform.position = Vector3.Slerp(transform.position, target, 0.01f);
+        transform.position = Vector3.Lerp(transform.position, target, 0.01f);
+    }
+
+    IEnumerator Move(int OrbColor)
+    {
+        yield return new WaitForSeconds(1);
+        target = actions[OrbColor];
     }
 }
