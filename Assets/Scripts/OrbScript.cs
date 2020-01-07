@@ -7,7 +7,7 @@ public class OrbScript : MonoBehaviour
     public Transform holdPoint;        //get the point at which we'll be held
     public Rigidbody orbRigidBody; //get the orb's rigidbody
     public bool isHeld;         //are we being held?
-    public Material redMat, greenMat, blueMat, orangeMat;
+    public List<Material> orbMats;
     public enum orbColorList{ None, Red, Green, Blue, Orange }; //what color is our orb?
     public orbColorList orbColor; //put it in the editor
     public int orbColorInt;
@@ -24,36 +24,13 @@ public class OrbScript : MonoBehaviour
     {   //define where the object is going to go if it's held
         holdPoint = GameObject.Find("Hold Point Player").GetComponent<Transform>();
 
-        #region //Color definition
-        if (orbColor == orbColorList.Red)
-        {
-            orbRend.material = redMat;
-        }
-
-        if (orbColor == orbColorList.Green)
-        {
-            orbRend.material = greenMat;
-        }
-
-        if (orbColor == orbColorList.Blue)
-        {
-            orbRend.material = blueMat;
-        }
-
-        if (orbColor == orbColorList.Orange)
-        {
-            orbRend.material = orangeMat;
-        }
-        #endregion
-
-        //cast the enum to an int
-        orbColorInt = (int)orbColor;
+        SetColor((int)orbColor);
 
         //set our starting position to the very first position recorded by the game
         startPos = transform.position;
     }
 
-    public void FixedUpdate()
+    public void Update()
     {
         if (isHeld)
         {
@@ -66,6 +43,14 @@ public class OrbScript : MonoBehaviour
     {
         transform.position = startPos;
         orbRigidBody.velocity = new Vector3(0, 0, 0);
+    }
+
+    public void SetColor(int colorNum)
+    {
+        orbRend.material = orbMats[colorNum];
+
+        //cast the enum to an int
+        orbColorInt = colorNum;
     }
 
 }

@@ -176,12 +176,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdPoint: {fileID: 0}
-  rigidbody: {fileID: 4680935008535074200}
+  orbRigidBody: {fileID: 0}
   isHeld: 0
-  redMat: {fileID: 2100000, guid: c4c680929b2ae7646b875ff9bcd65dd6, type: 2}
-  greenMat: {fileID: 2100000, guid: 4a5c0f68592b1ff4ca4c13fdd605dd7e, type: 2}
-  blueMat: {fileID: 2100000, guid: 9b9f961ea44801c4fa84621f8652e1bc, type: 2}
-  orangeMat: {fileID: 2100000, guid: 956d5198a7657c74293106edc12103c1, type: 2}
+  orbMats:
+  - {fileID: 2100000, guid: 650b220a779a498488fcce6f39381c18, type: 2}
+  - {fileID: 2100000, guid: c4c680929b2ae7646b875ff9bcd65dd6, type: 2}
+  - {fileID: 2100000, guid: 4a5c0f68592b1ff4ca4c13fdd605dd7e, type: 2}
+  - {fileID: 2100000, guid: ba915583b23b70a4b861b26898f2adf0, type: 2}
+  - {fileID: 2100000, guid: 956d5198a7657c74293106edc12103c1, type: 2}
   orbColor: 0
   orbColorInt: 0
   orbRend: {fileID: 4680935008535074183}
