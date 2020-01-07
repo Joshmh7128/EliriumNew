@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class PuzzlePartScript : MonoBehaviour
 {
-    [Tooltip("List of animation names that this puzzlePart can do, based on what color orb is used")] public List<Vector3> actions;
+    [Tooltip("List of animation names that this puzzlePart can do, based on what color orb is used" +
+        "White0 " +
+        "Red1 " +
+        "Green2 " +
+        "Blue3 " +
+        "Orange4 ")] public List<Vector3> actions;
+
     [Tooltip("The pedestal that activates this puzzlePart")] public GameObject pedestal;
     private Vector3 target;
 
