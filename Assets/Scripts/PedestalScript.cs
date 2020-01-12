@@ -44,6 +44,14 @@ public class PedestalScript : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Orb"))
+        {
+            SetColor(0);
+        }
+    }
+
     public void SetColor(int colorNum)
     {
         targetMat = orbMats[colorNum];
