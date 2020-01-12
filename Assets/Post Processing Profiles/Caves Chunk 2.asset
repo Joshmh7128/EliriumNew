@@ -96,7 +96,7 @@ MonoBehaviour:
     value: 1
   temperature:
     overrideState: 1
-    value: -10
+    value: -12
   tint:
     overrideState: 0
     value: 0
@@ -147,13 +147,13 @@ MonoBehaviour:
     value: 100
   lift:
     overrideState: 1
-    value: {x: 0.875183, y: 0.91957664, z: 1, w: 0.1585903}
+    value: {x: 0.875183, y: 0.91957664, z: 1, w: 0.035242286}
   gamma:
     overrideState: 1
-    value: {x: 0.8463619, y: 0.90856814, z: 1, w: -0.14096916}
+    value: {x: 0.8669317, y: 0.92941314, z: 1, w: -0.14096916}
   gain:
     overrideState: 1
-    value: {x: 0.92430234, y: 0.9299903, z: 1, w: 0.29955947}
+    value: {x: 0.80332184, y: 0.8709481, z: 1, w: 0.12334803}
   masterCurve:
     overrideState: 0
     value:
@@ -1375,7 +1375,7 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 1.44
+    value: 1.38
   color:
     overrideState: 1
     value: {r: 0, g: 0, b: 0, a: 1}
@@ -1421,10 +1421,10 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 13.3
+    value: 3
   threshold:
     overrideState: 1
-    value: 0.41
+    value: 0.34
   softKnee:
     overrideState: 0
     value: 0.5
@@ -1432,8 +1432,8 @@ MonoBehaviour:
     overrideState: 0
     value: 65472
   diffusion:
-    overrideState: 0
-    value: 7
+    overrideState: 1
+    value: 7.62
   anamorphicRatio:
     overrideState: 0
     value: 0
