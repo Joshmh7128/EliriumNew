@@ -10,6 +10,16 @@ public class CameraScript : MonoBehaviour
 
     [Range(0,15)]public float throwPower = 5;
 
+    //setup our ray to detect anything aside from the player
+    private LayerMask layerMask;
+    private RaycastHit hit;            //define our raycast
+
+    private void Awake()
+    {
+        layerMask = 1<<9; //get bitmap
+        layerMask = ~layerMask; //invert the layermask
+    }
+
     void FixedUpdate()
     {
        Vector3.Lerp(transform.position, cameraPos.position, 1f);
@@ -18,10 +28,7 @@ public class CameraScript : MonoBehaviour
     //cast a raycast forwards and see if we collide with an orb to pickup
     void Update()
     {
-        //setup our ray to detect anything aside from the player
-        int layerMask = 1 << 8; //get bitmap
-        layerMask = ~layerMask; //invert it
-        RaycastHit hit;         //define our raycast
+
 
 		//check to see if it can hit anything
 		if (_heldOrb == null && Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 5, layerMask)) // If the player is not holding a ball and the ray hits something
