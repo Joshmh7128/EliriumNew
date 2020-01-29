@@ -5,157 +5,233 @@ using MyBox;
 
 public class PuzzlePartScript : MonoBehaviour
 {
+    #region GlobalVariables
+    /// <summary>
+    /// Determines what puzzle mode this puzzlePart is in
+    /// </summary>
     public enum puzzlePartMode { Lerp, Anim }
+    /// <summary>
+    /// The puzzlePartMode being used by this puzzlePart
+    /// </summary>
     [Tooltip("The puzzle mode that this puzzlePart uses. ")] public puzzlePartMode mode;
-    public enum orbColorList { None, Red, Green, Blue, Orange }; //what color is our orb?
+    /// <summary>
+    /// The pedestal that activates this puzzlePart
+    /// </summary>
+    [Tooltip("The pedestal that activates this puzzlePart")] public GameObject pedestal;
+    #endregion
 
     #region LerpVariables
-    // ~~~ Inspector Variables ~~~
+    #region Inspector Variables
+    /// <summary>
+    /// The list of vector3 positions this puzzlePart can lerp to
+    /// </summary>
     [HideInInspector] public List<Vector3> lerpActions;
+    /// <summary>
+    /// The delay between the ball going in the pedestal and the puzzlePart starting to move, controllable from the editor
+    /// </summary>
     [ConditionalField("mode", false, puzzlePartMode.Lerp)] [Range(0, 5)] public int lerpLagTime = 1;
+    /// <summary>
+    /// The speed at which this puzzlePart moves, controllable from the editor
+    /// </summary>
     [ConditionalField("mode", false, puzzlePartMode.Lerp)] [Range(0, 10)] public float lerpSpeed = 0.05f;
-    [ConditionalField("mode", false, puzzlePartMode.Lerp)] public Vector3 defaultPos, redAction, greenAction, blueAction, orangeAction;
+    /// <summary>
+    /// One of the vector3 positions that this puzzlePart can lerp to
+    /// </summary>
+    [ConditionalField("mode", false, puzzlePartMode.Lerp)] public Vector3 lerpDefaultPos, redLerpAction, greenLerpAction, blueLerpAction, orangeLerpAction;
+    #endregion
 
-    // ~~~ Internal Variables ~~~
+    #region Internal Variables
+    /// <summary>
+    /// The time that the lerp started, used in lerp movement
+    /// </summary>
     private float lerpStartTime;
+    /// <summary>
+    /// The initial length of the lerp, used in lerp movement
+    /// </summary>
     private float lerpLength;
+    /// <summary>
+    /// The orb color (in int form) that is currently in the pedestal
+    /// </summary>
     private int colorExternal;
+    /// <summary>
+    /// The orb color (in int form) that is the current target
+    /// </summary>
     private int colorInternal;
+    /// <summary>
+    /// The current target position, used in lerp movement
+    /// </summary>
     private Vector3 target;
+    /// <summary>
+    /// The position that this puzzlePart started in, the default that it reverts to
+    /// </summary>
     private Vector3 startPos;
-    private bool isMoving;
+    /// <summary>
+    /// Is this puzzlePart currently lerping to a target?
+    /// </summary>
+    private bool isLerping;
+    #endregion
     #endregion
 
     #region AnimVariables
+    /// <summary>
+    /// The animator attached to this puzzlePart
+    /// </summary>
     [ConditionalField("mode", false, puzzlePartMode.Anim)] public Animator animator;
-    [HideInInspector]public List<string> triggerList;
+    /// <summary>
+    /// The list of booleans in the animator, used to trigger animations
+    /// </summary>
+    [HideInInspector]public List<string> animBoolList;
     #endregion
-
-    [Tooltip("The pedestal that activates this puzzlePart")] public GameObject pedestal;
-    
 
     private void Start()
     {
-        target = transform.position;
         #region LerpVariables
         if (mode == puzzlePartMode.Lerp)
         {
-            lerpActions.Add(defaultPos);
-            lerpActions.Add(redAction);
-            lerpActions.Add(greenAction);
-            lerpActions.Add(blueAction);
-            lerpActions.Add(orangeAction);
+            // Add the lerp actions to the list for internal use
+            lerpActions.Add(lerpDefaultPos);
+            lerpActions.Add(redLerpAction);
+            lerpActions.Add(greenLerpAction);
+            lerpActions.Add(blueLerpAction);
+            lerpActions.Add(orangeLerpAction);
 
+            // Sets the default values for lerping variables, makes sure the puzzlePart doesn't move immediately
             lerpStartTime = Time.time;
             lerpLength = 0;
+            target = transform.position;
+            colorExternal = 0; // Indicates that there is nothing in the pedestal
+            isLerping = false;
+
+            // Sets the lerpDefaultPos to the current position
             startPos = transform.position;
             lerpActions[0] = startPos;
-            colorExternal = 0; // Indicates that there is nothing in the pedestal
-            isMoving = false;
         }
         #endregion
+
+        #region AnimVariables
         else if (mode == puzzlePartMode.Anim)
         {
-            triggerList.Add("white");
-            triggerList.Add("red");
-            triggerList.Add("green");
-            triggerList.Add("blue");
-            triggerList.Add("orange");
+            // Adds the animation bools to the list for internal use
+            animBoolList.Add("white");
+            animBoolList.Add("red");
+            animBoolList.Add("green");
+            animBoolList.Add("blue");
+            animBoolList.Add("orange");
         }
-
+        #endregion
     }
 
+    /// <summary>
+    /// The main function of this script, takes the input from the pedestal and activates the appropriate action
+    /// </summary>
+    /// <param name="OrbColor">The color of the orb entering/leaving the pedestal</param>
+    /// <param name="inPedestal">Determines whether the orb is entering or leaving the pedestal</param>
     public void Activate(int OrbColor, bool inPedestal)
     {
+        #region LerpActivate
         if (mode == puzzlePartMode.Lerp) // ~~~ Using Lerp System ~~~
         {
-            StartCoroutine(Move(OrbColor, inPedestal, lerpLagTime));
+            // Passes the information to a coroutine to allow for lag time
+            StartCoroutine(lerpMove(OrbColor, inPedestal, lerpLagTime));
         }
+        #endregion
 
-
-
-
-        else if (mode == puzzlePartMode.Anim && inPedestal) // ~~~ Using Animation System ~~~
+        #region AnimActivate
+        else if (mode == puzzlePartMode.Anim && inPedestal) // Using animation system and ball entering pedestal
         {
-            animator.SetBool(triggerList[OrbColor], true);
+            // Passes the information to the animator attached to this puzzlePart
+            animator.SetBool(animBoolList[OrbColor], true);
         }
-        else if (mode == puzzlePartMode.Anim && !inPedestal)
+        else if (mode == puzzlePartMode.Anim && !inPedestal) // Using animation system and ball leaving pedestal
         {
-            animator.SetBool(triggerList[OrbColor], false);
+            // Passes teh information to the animator attached to this puzzlePart
+            animator.SetBool(animBoolList[OrbColor], false);
         }
+        #endregion
+
+        // Error detection
         else
         {
             Debug.Log("invalid puzzlePartMode on part " + gameObject.name);
         }
-            
     }
 
     private void Update()
     {
+        #region LerpUpdate
         if (mode == puzzlePartMode.Lerp)
         {
-            if (Vector3.Distance(transform.position, target) > .1)
+            if (Vector3.Distance(transform.position, target) > .1) // If the target is not ~= the current position
             {
-                //Debug.Log("Move from " + transform.position + " to " + target);
-                //Debug.Log("move");
+                // Updates distTraveled and lerpFraction based on the time, speed, and distance variables, used in the lerp
                 float distTraveled = (Time.time - lerpStartTime) * lerpSpeed;
                 float lerpFraction = distTraveled / lerpLength;
 
+                // Changes the position through a lerp
                 transform.position = Vector3.Lerp(transform.position, target, lerpFraction);
-                isMoving = true;
+                // Disables new movement until this lerp is complete
+                isLerping = true;
                 
             }
-            else if (Vector3.Distance(transform.position, target) < .1 && isMoving)
+            else if (Vector3.Distance(transform.position, target) < .1 && isLerping) // If the target is ~= the current position and the puzzlePart was lerping previously
             {
-                isMoving = false;
+                // Enables new movmement
+                isLerping = false;
             }
-            else if (Vector3.Distance(transform.position, startPos) < .1 && colorExternal != 0 && lerpActions[colorExternal] != new Vector3(-999, -999, -999) && !isMoving) // At start, but something is in the pedestal
+            else if (Vector3.Distance(transform.position, startPos) < .1 && colorExternal != 0 && lerpActions[colorExternal] != new Vector3(-999, -999, -999) && !isLerping) // At start, but something is in the pedestal
             {
-                //Debug.Log("Move from start in update");
+                // Shift the external color (currently in the pedestal) to the internal (current target)
                 colorInternal = colorExternal;
 
+                // Sets the lerp variables to begin movement
                 lerpStartTime = Time.time;
                 lerpLength = Vector3.Distance(transform.position, lerpActions[colorExternal]);
-                target = lerpActions[colorExternal];
+                target = lerpActions[colorInternal]; // Target determined by current orbColor
 
-                isMoving = true;
+                // Disables new movement until the lerp is complete
+                isLerping = true;
             }
-            else if (Vector3.Distance(transform.position, target) < .1 && Vector3.Distance(transform.position, startPos) > .1 && colorExternal != colorInternal && !isMoving)
+            else if (Vector3.Distance(transform.position, target) < .1 && Vector3.Distance(transform.position, startPos) > .1 && colorExternal != colorInternal && !isLerping) // At a position, but that color is not in the pedestal
             {
-                //Debug.Log("Move to start in update");
-
+                // Sets the lerp variables to begin movement
                 lerpStartTime = Time.time;
                 lerpLength = Vector3.Distance(transform.position, lerpActions[colorExternal]);
-                target = lerpActions[0];
-
-                isMoving = true;
+                target = lerpActions[0]; // Target is intial default position
+                
+                // Disables new movment until the lerp is complete
+                isLerping = true;
             }
             else
             {
-                //Debug.Log("Wait");
+                // No need to move
             }
         }
+        #endregion
     }
 
-    IEnumerator Move(int OrbColor, bool inPedestal, float lagTime)
+    /// <summary>
+    /// The coroutine used when an orb enters or leaves the pedestal
+    /// </summary>
+    /// <param name="OrbColor"></param>
+    /// <param name="inPedestal"></param>
+    /// <param name="lagTime"></param>
+    /// <returns></returns>
+    IEnumerator lerpMove(int OrbColor, bool inPedestal, float lagTime)
     {
-        //Debug.Log("wait for it");
         yield return new WaitForSeconds(lagTime);
-        //Debug.Log("start the move");
+        
         if (inPedestal == true && lerpActions[OrbColor] != new Vector3(-999, -999, -999)) // Orb is in pedestal and this object should do something
         {
-            //Debug.Log("ball" + OrbColor);
+            // Updates the external (current) orb in the pedestal
             colorExternal = OrbColor;
-            if (transform.position == startPos)
+            if (transform.position == startPos) // If in the default position
             {
-                //Debug.Log("Starting move");
+                // Updates the internal (movement target) orb color
                 colorInternal = OrbColor;
-                
             }
         }
-        else
+        else // No orb is in the pedestal or the current orb has no associated action
         {
-            //Debug.Log("clear pedestal");
             colorExternal = 0; // Indicates that there is nothing in the pedestal
         }
     }

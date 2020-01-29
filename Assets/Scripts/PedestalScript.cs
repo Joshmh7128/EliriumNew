@@ -58,11 +58,15 @@ public class PedestalScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates the color of this pedestal
+    /// </summary>
+    /// <param name="colorNum">The color to update to</param>
     public void SetColor(int colorNum)
     {
         targetMat = orbMats[colorNum];
 
-        //cast the enum to an int
+        // Cast the enum to an int
         pedColorInt = colorNum;
     }
 }
