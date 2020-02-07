@@ -7,7 +7,7 @@ namespace MyBox.Internal
 	[InitializeOnLoad]
 	public class MyBoxUpdateWindow : EditorWindow
 	{
-		public static bool AutoUpdateCheckIsEnabled = true;
+		public static bool AutoUpdateCheckIsEnabled = false;
 
 		private static MyBoxVersion _installedVersion;
 		private static MyBoxVersion _latestVersion;

@@ -31,10 +31,10 @@ public class PedestalScript : MonoBehaviour
     {
         if (other.CompareTag("Orb"))
         {
-            //Debug.Log("Orb!");
+            //Debug.Log("Orb in");
             foreach (PuzzlePartScript activated in puzzleParts)
             {
-                activated.Activate(other.GetComponent<OrbScript>().orbColorInt);
+                activated.Activate(other.GetComponent<OrbScript>().orbColorInt, true);
             }
             SetColor(other.GetComponent<OrbScript>().orbColorInt);
         }
@@ -48,15 +48,25 @@ public class PedestalScript : MonoBehaviour
     {
         if (other.CompareTag("Orb"))
         {
+            //Debug.Log("Orb out");
+            foreach(PuzzlePartScript activated in puzzleParts)
+            {
+                activated.Activate(other.GetComponent<OrbScript>().orbColorInt, false);
+            }
+
             SetColor(0);
         }
     }
 
+    /// <summary>
+    /// Updates the color of this pedestal
+    /// </summary>
+    /// <param name="colorNum">The color to update to</param>
     public void SetColor(int colorNum)
     {
         targetMat = orbMats[colorNum];
 
-        //cast the enum to an int
+        // Cast the enum to an int
         pedColorInt = colorNum;
     }
 }
