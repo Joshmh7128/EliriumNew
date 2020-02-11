@@ -22,6 +22,9 @@ public class PuzzlePartScript : MonoBehaviour
 
     #region LerpVariables
     #region Inspector Variables
+    public enum lerpMode { Speed, Duration }
+
+    [ConditionalField("mode", false, puzzlePartMode.Lerp)] public lerpMode lerpStyle;
     /// <summary>
     /// The list of vector3 positions this puzzlePart can lerp to
     /// </summary>
@@ -33,7 +36,11 @@ public class PuzzlePartScript : MonoBehaviour
     /// <summary>
     /// The speed at which this puzzlePart moves, controllable from the editor
     /// </summary>
-    [ConditionalField("mode", false, puzzlePartMode.Lerp)] [Range(0, 10)] public float lerpSpeed = 0.05f;
+    [ConditionalField("lerpStyle", false, lerpMode.Speed)] [Range(0, 25)] public float lerpSpeed = 1;
+    /// <summary>
+    /// The speed at which this puzzlePart moves, controllable from the editor
+    /// </summary>
+    [ConditionalField("lerpStyle", false, lerpMode.Duration)] [Range(0, 25)] public float lerpDuration = 1;
     /// <summary>
     /// One of the vector3 positions that this puzzlePart can lerp to
     /// </summary>
@@ -61,6 +68,8 @@ public class PuzzlePartScript : MonoBehaviour
     /// The current target position, used in lerp movement
     /// </summary>
     private Vector3 target;
+
+    private Vector3 checkTarget;
     /// <summary>
     /// The position that this puzzlePart started in, the default that it reverts to
     /// </summary>
@@ -69,6 +78,8 @@ public class PuzzlePartScript : MonoBehaviour
     /// Is this puzzlePart currently lerping to a target?
     /// </summary>
     private bool isLerping;
+
+    private Vector3 lerpStartPos;
     #endregion
     #endregion
 
@@ -132,7 +143,22 @@ public class PuzzlePartScript : MonoBehaviour
         if (mode == puzzlePartMode.Lerp) // ~~~ Using Lerp System ~~~
         {
             // Passes the information to a coroutine to allow for lag time
-            StartCoroutine(lerpMove(OrbColor, inPedestal, lerpLagTime));
+            // StartCoroutine(lerpMove(OrbColor, inPedestal, lerpLagTime));
+
+            if (inPedestal == true && lerpActions[OrbColor] != new Vector3(-999, -999, -999)) // Orb is in pedestal and this object should do something
+            {
+                // Updates the external (current) orb in the pedestal
+                colorExternal = OrbColor;
+                if (transform.position == startPos) // If in the default position
+                {
+                    // Updates the internal (movement target) orb color
+                    colorInternal = OrbColor;
+                }
+            }
+            else // No orb is in the pedestal or the current orb has no associated action
+            {
+                colorExternal = 0; // Indicates that there is nothing in the pedestal
+            }
         }
         #endregion
 
@@ -168,12 +194,12 @@ public class PuzzlePartScript : MonoBehaviour
                 float lerpFraction = distTraveled / lerpLength;
 
                 // Changes the position through a lerp
-                transform.position = Vector3.Lerp(transform.position, target, lerpFraction);
+                transform.position = Vector3.Lerp(lerpStartPos, target, lerpFraction);
                 // Disables new movement until this lerp is complete
                 isLerping = true;
                 
             }
-            else if (Vector3.Distance(transform.position, target) < .1 && isLerping) // If the target is ~= the current position and the puzzlePart was lerping previously
+            else if (Vector3.Distance(transform.position, checkTarget) < .1 && isLerping) // If the target is ~= the current position and the puzzlePart was lerping previously
             {
                 // Enables new movmement
                 isLerping = false;
@@ -184,9 +210,15 @@ public class PuzzlePartScript : MonoBehaviour
                 colorInternal = colorExternal;
 
                 // Sets the lerp variables to begin movement
-                lerpStartTime = Time.time;
+                
                 lerpLength = Vector3.Distance(transform.position, lerpActions[colorExternal]);
-                target = lerpActions[colorInternal]; // Target determined by current orbColor
+                if(lerpStyle == lerpMode.Duration)
+                {
+                    lerpSpeed = lerpLength / lerpDuration;
+                }
+                lerpStartPos = transform.position;
+                checkTarget = lerpActions[colorInternal]; // Target determined by current orbColor
+                StartCoroutine(lerpMove(lerpActions[colorInternal]));
 
                 // Disables new movement until the lerp is complete
                 isLerping = true;
@@ -194,10 +226,15 @@ public class PuzzlePartScript : MonoBehaviour
             else if (Vector3.Distance(transform.position, target) < .1 && Vector3.Distance(transform.position, startPos) > .1 && colorExternal != colorInternal && !isLerping) // At a position, but that color is not in the pedestal
             {
                 // Sets the lerp variables to begin movement
-                lerpStartTime = Time.time;
                 lerpLength = Vector3.Distance(transform.position, lerpActions[colorExternal]);
-                target = lerpActions[0]; // Target is intial default position
-                
+                if (lerpStyle == lerpMode.Duration)
+                {
+                    lerpSpeed = lerpLength / lerpDuration;
+                }
+                lerpStartPos = transform.position;
+                checkTarget = lerpActions[0]; // Target is intial default position
+                StartCoroutine(lerpMove(lerpActions[0]));
+
                 // Disables new movment until the lerp is complete
                 isLerping = true;
             }
@@ -216,23 +253,11 @@ public class PuzzlePartScript : MonoBehaviour
     /// <param name="inPedestal"></param>
     /// <param name="lagTime"></param>
     /// <returns></returns>
-    IEnumerator lerpMove(int OrbColor, bool inPedestal, float lagTime)
+    IEnumerator lerpMove(Vector3 targetPos)
     {
-        yield return new WaitForSeconds(lagTime);
-        
-        if (inPedestal == true && lerpActions[OrbColor] != new Vector3(-999, -999, -999)) // Orb is in pedestal and this object should do something
-        {
-            // Updates the external (current) orb in the pedestal
-            colorExternal = OrbColor;
-            if (transform.position == startPos) // If in the default position
-            {
-                // Updates the internal (movement target) orb color
-                colorInternal = OrbColor;
-            }
-        }
-        else // No orb is in the pedestal or the current orb has no associated action
-        {
-            colorExternal = 0; // Indicates that there is nothing in the pedestal
-        }
+        yield return new WaitForSeconds(lerpLagTime);
+
+        lerpStartTime = Time.time;
+        target = targetPos;
     }
 }
