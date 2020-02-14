@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 90d5d1d0ecbd28d47be84dcc1f9fa73d, type: 3}
+  - {fileID: 2100000, guid: 254295371fd4fd34681d330ecde34ae4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -122,7 +122,7 @@ MonoBehaviour:
   orbDetect: {fileID: 7098534610554636570}
   puzzleParts: []
   orbMats:
-  - {fileID: 2100000, guid: 650b220a779a498488fcce6f39381c18, type: 2}
+  - {fileID: 2100000, guid: 254295371fd4fd34681d330ecde34ae4, type: 2}
   - {fileID: 2100000, guid: c4c680929b2ae7646b875ff9bcd65dd6, type: 2}
   - {fileID: 2100000, guid: 4a5c0f68592b1ff4ca4c13fdd605dd7e, type: 2}
   - {fileID: 2100000, guid: ba915583b23b70a4b861b26898f2adf0, type: 2}
