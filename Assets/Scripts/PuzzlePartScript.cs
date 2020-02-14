@@ -247,7 +247,7 @@ public class PuzzlePartScript : MonoBehaviour
     }
 
     /// <summary>
-    /// The coroutine used when an orb enters or leaves the pedestal
+    /// The coroutine used when an orb enters or leaves the pedestal in lerp mode
     /// </summary>
     /// <param name="OrbColor"></param>
     /// <param name="inPedestal"></param>
