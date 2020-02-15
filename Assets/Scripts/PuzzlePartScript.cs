@@ -44,7 +44,7 @@ public class PuzzlePartScript : MonoBehaviour
     /// <summary>
     /// One of the vector3 positions that this puzzlePart can lerp to
     /// </summary>
-    [ConditionalField("mode", false, puzzlePartMode.Lerp)] public Vector3 lerpDefaultPos, redLerpAction, greenLerpAction, blueLerpAction, orangeLerpAction;
+    [ConditionalField("mode", false, puzzlePartMode.Lerp)] public Vector3 lerpDefaultPos, redLerpAction = new Vector3(-999, -999, -999), greenLerpAction = new Vector3(-999, -999, -999), blueLerpAction = new Vector3(-999, -999, -999), orangeLerpAction = new Vector3(-999,-999,-999);
     #endregion
 
     #region Internal Variables
