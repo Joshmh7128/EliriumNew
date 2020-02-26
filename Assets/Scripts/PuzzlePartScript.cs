@@ -7,9 +7,9 @@ public class PuzzlePartScript : MonoBehaviour
 {
     #region GlobalVariables
     /// <summary>
-    /// Determines what puzzle mode this puzzlePart is in
+    /// Determines what puzzle mode this puzzlePart is in. Lerp moves an object through transform.position, Animation sets bools in an animator, and Conduit passes the signal to one or more other puzzleParts.
     /// </summary>
-    public enum puzzlePartMode { Lerp, Anim }
+    public enum puzzlePartMode { Lerp, Anim, Cond }
     /// <summary>
     /// The puzzlePartMode being used by this puzzlePart
     /// </summary>
@@ -94,9 +94,17 @@ public class PuzzlePartScript : MonoBehaviour
     [HideInInspector]public List<string> animBoolList;
     #endregion
 
+    #region CondVariables
+    [ConditionalField("mode", false, puzzlePartMode.Cond)][Tooltip("The list of puzzle objects that this pedestal activates")] public List<PuzzlePartScript> puzzleParts;
+
+    [ConditionalField("mode", false, puzzlePartMode.Cond)] public List<Material> puzzlePartMats;
+    [ConditionalField("mode", false, puzzlePartMode.Cond)] public MeshRenderer pedRend;
+    private Material targetMat;
+    #endregion
+
     private void Start()
     {
-        #region LerpVariables
+#region LerpVariables
         if (mode == puzzlePartMode.Lerp)
         {
             // Add the lerp actions to the list for internal use
@@ -117,9 +125,9 @@ public class PuzzlePartScript : MonoBehaviour
             startPos = transform.position;
             lerpActions[0] = startPos;
         }
-        #endregion
+#endregion
 
-        #region AnimVariables
+#region AnimVariables
         else if (mode == puzzlePartMode.Anim)
         {
             // Adds the animation bools to the list for internal use
@@ -130,6 +138,11 @@ public class PuzzlePartScript : MonoBehaviour
             animBoolList.Add("orange");
         }
         #endregion
+
+        #region CondVariables
+        pedRend = gameObject.GetComponent<MeshRenderer>();
+        targetMat = pedRend.material;
+        #endregion
     }
 
     /// <summary>
@@ -139,7 +152,7 @@ public class PuzzlePartScript : MonoBehaviour
     /// <param name="inPedestal">Determines whether the orb is entering or leaving the pedestal</param>
     public void Activate(int OrbColor, bool inPedestal)
     {
-        #region LerpActivate
+#region LerpActivate
         if (mode == puzzlePartMode.Lerp) // ~~~ Using Lerp System ~~~
         {
             // Passes the information to a coroutine to allow for lag time
@@ -160,9 +173,9 @@ public class PuzzlePartScript : MonoBehaviour
                 colorExternal = 0; // Indicates that there is nothing in the pedestal
             }
         }
-        #endregion
+#endregion
 
-        #region AnimActivate
+#region AnimActivate
         else if (mode == puzzlePartMode.Anim && inPedestal) // Using animation system and ball entering pedestal
         {
             // Passes the information to the animator attached to this puzzlePart
@@ -175,6 +188,26 @@ public class PuzzlePartScript : MonoBehaviour
         }
         #endregion
 
+#region CondActivate
+        else if (mode == puzzlePartMode.Cond)
+        {
+            foreach (PuzzlePartScript activated in puzzleParts)
+            {
+                Debug.Log(activated);
+                activated.Activate(OrbColor, inPedestal);
+            }
+            if (inPedestal)
+            {
+                SetColor(OrbColor);
+
+            }
+            else
+            {
+                SetColor(0);
+            }
+        }
+        #endregion
+
         // Error detection
         else
         {
@@ -184,7 +217,7 @@ public class PuzzlePartScript : MonoBehaviour
 
     private void Update()
     {
-        #region LerpUpdate
+#region LerpUpdate
         if (mode == puzzlePartMode.Lerp)
         {
             if (Vector3.Distance(transform.position, target) > .1) // If the target is not ~= the current position
@@ -244,6 +277,13 @@ public class PuzzlePartScript : MonoBehaviour
             }
         }
         #endregion
+
+#region CondUpdate
+        else if (mode == puzzlePartMode.Cond)
+        {
+            pedRend.material.Lerp(pedRend.material, targetMat, 0.2f);
+        }
+        #endregion
     }
 
     /// <summary>
@@ -259,5 +299,10 @@ public class PuzzlePartScript : MonoBehaviour
 
         lerpStartTime = Time.time;
         target = targetPos;
+    }
+
+    public void SetColor(int colorNum)
+    {
+        targetMat = puzzlePartMats[colorNum];
     }
 }
