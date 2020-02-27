@@ -193,7 +193,6 @@ public class PuzzlePartScript : MonoBehaviour
         {
             foreach (PuzzlePartScript activated in puzzleParts)
             {
-                Debug.Log(activated);
                 activated.Activate(OrbColor, inPedestal);
             }
             if (inPedestal)

@@ -32,7 +32,7 @@ public class LightEmitterScript : MonoBehaviour
         {
             PuzzlePartScript hitScript = lightHit.transform.gameObject.GetComponent<PuzzlePartScript>();
             //Debug.DrawRay(transform.position, transform.forward * lightHit.distance, Color.red);
-            if (hitScript != null)
+            if (hitScript != null && lightHit.transform.tag != "LightBlocker")
             {
                 hitScript.Activate(lightColorInt, true);
             }
@@ -42,7 +42,7 @@ public class LightEmitterScript : MonoBehaviour
         {
             if (lightHit.transform.gameObject != lastHit)
             {
-                if (lastHit.GetComponent<PuzzlePartScript>())
+                if (lastHit.GetComponent<PuzzlePartScript>() && lastHit.tag != "LightBlocker")
                 {
                     lastHit.GetComponent<PuzzlePartScript>().Activate(lightColorInt, false);
                 }
@@ -54,7 +54,7 @@ public class LightEmitterScript : MonoBehaviour
         {
             if (lastHit != null)
             {
-                if (lastHit.GetComponent<PuzzlePartScript>())
+                if (lastHit.GetComponent<PuzzlePartScript>() && lastHit.tag != "LightBlocker")
                 {
                     lastHit.GetComponent<PuzzlePartScript>().Activate(lightColorInt, false);
                 }
