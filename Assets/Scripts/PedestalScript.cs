@@ -9,7 +9,7 @@ public class PedestalScript : MonoBehaviour
     [Tooltip("The list of puzzle objects that this pedestal activates")] public List<PuzzlePartScript> puzzleParts;
 
     public List<Material> orbMats;
-    public enum pedColorList { None, Red, Green, Blue, Orange }; //what color is our orb?
+    public enum pedColorList { None, Red, Green, Blue, Purple }; //what color is our orb?
     public pedColorList pedColor; //put it in the editor
     public int pedColorInt;
     public MeshRenderer pedRend;

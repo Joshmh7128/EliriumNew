@@ -104,7 +104,7 @@ public class PuzzlePartScript : MonoBehaviour
 
     private void Start()
     {
-#region LerpVariables
+        #region LerpVariables
         if (mode == puzzlePartMode.Lerp)
         {
             // Add the lerp actions to the list for internal use
@@ -127,7 +127,7 @@ public class PuzzlePartScript : MonoBehaviour
         }
 #endregion
 
-#region AnimVariables
+        #region AnimVariables
         else if (mode == puzzlePartMode.Anim)
         {
             // Adds the animation bools to the list for internal use
@@ -135,13 +135,16 @@ public class PuzzlePartScript : MonoBehaviour
             animBoolList.Add("red");
             animBoolList.Add("green");
             animBoolList.Add("blue");
-            animBoolList.Add("orange");
+            animBoolList.Add("purple");
         }
         #endregion
 
         #region CondVariables
-        pedRend = gameObject.GetComponent<MeshRenderer>();
-        targetMat = pedRend.material;
+        else if (mode == puzzlePartMode.Cond)
+        {
+            pedRend = gameObject.GetComponent<MeshRenderer>();
+            targetMat = pedRend.material;
+        }
         #endregion
     }
 

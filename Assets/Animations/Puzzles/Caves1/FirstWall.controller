@@ -33,7 +33,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: orange
+  - m_Name: purple
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0

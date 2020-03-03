@@ -6,10 +6,11 @@ public class LightEmitterScript : MonoBehaviour
 {
 
     public List<Material> orbMats;
-    public enum lightColorList { None, Red, Green, Blue, Orange }; //what color is our orb?
+    public enum lightColorList { None, Red, Green, Blue, Purple }; //what color is our orb?
     public lightColorList lightColor; //put it in the editor
     public int lightColorInt;
     public MeshRenderer pedRend;
+    public LineRenderer lineRend;
     private Material targetMat;
 
     private RaycastHit lightHit;
@@ -21,6 +22,7 @@ public class LightEmitterScript : MonoBehaviour
     void Start()
     {
         SetColor((int)lightColor);
+        //lineRend = gameObject.GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
@@ -35,6 +37,7 @@ public class LightEmitterScript : MonoBehaviour
             if (hitScript != null && lightHit.transform.tag != "LightBlocker")
             {
                 hitScript.Activate(lightColorInt, true);
+                lineRend.SetPosition(1, transform.InverseTransformPoint(lightHit.point));
             }
             lastHit = lightHit.transform.gameObject;
         }
@@ -49,6 +52,7 @@ public class LightEmitterScript : MonoBehaviour
                 lastHit = null;
             }
             Debug.DrawRay(transform.position, transform.forward * lightHit.distance, Color.blue);
+            lineRend.SetPosition(1, transform.InverseTransformPoint(lightHit.point));
         }
         else
         {
@@ -62,7 +66,8 @@ public class LightEmitterScript : MonoBehaviour
             }
                 
             Debug.DrawRay(transform.position, transform.forward * rayLength, Color.yellow);
-            
+            lineRend.SetPosition(1, transform.InverseTransformPoint(transform.position + transform.forward*rayLength));
+
         }
     }
 
@@ -73,6 +78,8 @@ public class LightEmitterScript : MonoBehaviour
     public void SetColor(int colorNum)
     {
         targetMat = orbMats[colorNum];
+
+        lineRend.material = orbMats[colorNum];
 
         // Cast the enum to an int
         lightColorInt = colorNum;
