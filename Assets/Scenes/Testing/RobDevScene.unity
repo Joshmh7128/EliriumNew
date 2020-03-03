@@ -1085,16 +1085,6 @@ PrefabInstance:
       propertyPath: orbColor
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4680935008535074180, guid: 06b86b6cbd191694b8582652ef4d2f4a,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 4300012, guid: 9a7f477e2db071d4a80efe43e531ea69, type: 3}
-    - target: {fileID: 4680935008535074182, guid: 06b86b6cbd191694b8582652ef4d2f4a,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.57
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06b86b6cbd191694b8582652ef4d2f4a, type: 3}
 --- !u!43 &124674020
@@ -21990,6 +21980,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1898590011, guid: ce37268466e9eea4886bd0a32c63816e, type: 3}
+      propertyPath: frustumSettings.qualitySettings
+      value: 
+      objectReference: {fileID: 579020324}
+    - target: {fileID: 717539021375213005, guid: ce37268466e9eea4886bd0a32c63816e,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: dba2c0a3f1d376b49802bcac7f9d67dd,
+        type: 2}
     - target: {fileID: 369801837282847599, guid: ce37268466e9eea4886bd0a32c63816e,
         type: 3}
       propertyPath: Crosshair
@@ -22001,16 +22001,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1898590011, guid: ce37268466e9eea4886bd0a32c63816e, type: 3}
-      propertyPath: frustumSettings.qualitySettings
-      value: 
-      objectReference: {fileID: 579020324}
-    - target: {fileID: 717539021375213005, guid: ce37268466e9eea4886bd0a32c63816e,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: dba2c0a3f1d376b49802bcac7f9d67dd,
-        type: 2}
     - target: {fileID: 717539021375213004, guid: ce37268466e9eea4886bd0a32c63816e,
         type: 3}
       propertyPath: m_Enabled
