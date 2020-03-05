@@ -34,7 +34,7 @@ public class PedestalScript : MonoBehaviour
             //Debug.Log("Orb in");
             foreach (PuzzlePartScript activated in puzzleParts)
             {
-                activated.Activate(other.GetComponent<OrbScript>().orbColorInt, true);
+                activated.Activate(other.GetComponent<OrbScript>().orbColorInt, true, gameObject);
             }
             SetColor(other.GetComponent<OrbScript>().orbColorInt);
         }
@@ -51,7 +51,7 @@ public class PedestalScript : MonoBehaviour
             //Debug.Log("Orb out");
             foreach(PuzzlePartScript activated in puzzleParts)
             {
-                activated.Activate(other.GetComponent<OrbScript>().orbColorInt, false);
+                activated.Activate(other.GetComponent<OrbScript>().orbColorInt, false, gameObject);
             }
 
             SetColor(0);

@@ -6,9 +6,9 @@ using MyBox;
 public class PuzzlePartScript : MonoBehaviour
 {
     /// <summary>
-    /// Determines what puzzle mode this puzzlePart is in. Lerp moves an object through transform.position, Animation sets bools in an animator, and Conduit passes the signal to one or more other puzzleParts.
+    /// Determines what puzzle mode this puzzlePart is in. Lerp moves an object through transform.position, Animation sets bools in an animator, Conduit passes the signal to one or more other puzzleParts, Collector waits for multiple signals and then acts like a conduit.
     /// </summary>
-    public enum puzzlePartMode { Lerp, Anim, Cond }
+    public enum puzzlePartMode { Lerp, Anim, Cond, Coll }
     /// <summary>
     /// The puzzlePartMode being used by this puzzlePart
     /// </summary>
@@ -21,8 +21,9 @@ public class PuzzlePartScript : MonoBehaviour
     [ConditionalField("mode", false, puzzlePartMode.Lerp)] public LerpPuzzleScript lerpScript;
     [ConditionalField("mode", false, puzzlePartMode.Anim)] public AnimPuzzleScript animScript;
     [ConditionalField("mode", false, puzzlePartMode.Cond)] public CondPuzzleScript condScript;
+    [ConditionalField("mode", false, puzzlePartMode.Coll)] public CollPuzzleScript collScript;
 
-    public void Activate(int activateColor, bool isActivated)
+    public void Activate(int activateColor, bool isActivated, GameObject source)
     {
         if (mode == puzzlePartMode.Lerp)
         {
@@ -35,6 +36,10 @@ public class PuzzlePartScript : MonoBehaviour
         else if (mode == puzzlePartMode.Cond)
         {
             condScript.Activate(activateColor, isActivated);
+        }
+        else if (mode == puzzlePartMode.Coll)
+        {
+            collScript.Activate(activateColor, isActivated, source);
         }
     }
 }

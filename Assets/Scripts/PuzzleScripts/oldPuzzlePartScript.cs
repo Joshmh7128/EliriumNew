@@ -196,7 +196,7 @@ public class oldPuzzlePartScript : MonoBehaviour
         {
             foreach (PuzzlePartScript activated in puzzleParts)
             {
-                activated.Activate(OrbColor, inPedestal);
+                activated.Activate(OrbColor, inPedestal, gameObject);
             }
             if (inPedestal)
             {

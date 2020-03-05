@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CondPuzzleScript : MonoBehaviour
 {
-    [Tooltip("The list of puzzle objects that this pedestal activates")] public List<PuzzlePartScript> puzzleParts;
+    public bool collecting;
+    [Tooltip("The list of puzzle objects that this Conduit activates")] public List<PuzzlePartScript> puzzleParts;
     public List<Material> puzzlePartMats;
     private MeshRenderer condRend;
     private Material targetMat;
@@ -20,17 +21,20 @@ public class CondPuzzleScript : MonoBehaviour
     {
         foreach (PuzzlePartScript activated in puzzleParts)
         {
-            activated.Activate(activateColor, isActivated);
+            activated.Activate(activateColor, isActivated, gameObject);
         }
 
-        if (isActivated)
+        if (!collecting)
         {
-            SetColor(activateColor);
+            if (isActivated)
+            {
+                SetColor(activateColor);
 
-        }
-        else
-        {
-            SetColor(0);
+            }
+            else
+            {
+                SetColor(0);
+            }
         }
     }
 
