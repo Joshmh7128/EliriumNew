@@ -6,7 +6,7 @@ public class CameraScript : MonoBehaviour
 {
     public bool isHolding; //check to see if we're holding something
     public Transform cameraPos;
-	private OrbScript _heldOrb;
+	private Orb_PuzzleScript _heldOrb;
 
     [Range(0,15)]public float throwPower = 5;
 
@@ -36,11 +36,11 @@ public class CameraScript : MonoBehaviour
 			//Debug.Log("Hit");
 			Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 5, Color.red);
 
-			if ((hit.collider.tag == "Orb") & (Input.GetKeyDown(KeyCode.E))) // If the thing the ray hits is a ball and the player presses e
+			if ((hit.collider.GetComponent<Orb_PuzzleScript>()) & (Input.GetKeyDown(KeyCode.E))) // If the thing the ray hits is a ball and the player presses e
 			{   //make sure we both make the orb get held and make the camera hold the camera
-				hit.collider.gameObject.GetComponent<OrbScript>().isHeld = !hit.collider.gameObject.GetComponent<OrbScript>().isHeld;
+				hit.collider.gameObject.GetComponent<Orb_PuzzleScript>().isHeld = !hit.collider.gameObject.GetComponent<Orb_PuzzleScript>().isHeld;
 				isHolding = !isHolding;
-				_heldOrb = hit.collider.gameObject.GetComponent<OrbScript>();
+				_heldOrb = hit.collider.gameObject.GetComponent<Orb_PuzzleScript>();
 			}
 		}
 		else if (_heldOrb != null) // If the player is holding a ball

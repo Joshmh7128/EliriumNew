@@ -10,7 +10,7 @@ public class ObjectContactTeleportScript : MonoBehaviour
     private void OnTriggerEnter(Collider obj)
     {
         // teleport any object that touches this to it's new position
-        if (obj.CompareTag("Orb") || obj.CompareTag("Player"))
+        if (obj.GetComponent<Orb_PuzzleScript>() || obj.CompareTag("Player"))
         {
             obj.transform.position = gotoPosition; // set position
             obj.attachedRigidbody.velocity = new Vector3(0, 0, 0); // slow that boy down
