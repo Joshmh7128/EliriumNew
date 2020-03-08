@@ -809,13 +809,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mode: 2
   source: {fileID: 0}
-  orb_Script: {fileID: 0}
+  _orbScript: {fileID: 0}
   TrigScript: {fileID: 0}
+  lghtScript: {fileID: 7145373723105466429}
   lerpScript: {fileID: 0}
   animScript: {fileID: 0}
   condScript: {fileID: 0}
   collScript: {fileID: 0}
-  lghtScript: {fileID: 7145373723105466429}
 --- !u!114 &7145373723105466429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -834,7 +834,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: f5963c4df201d41489aa3d100a483104, type: 2}
   - {fileID: 2100000, guid: 1f67437d4f0e72c46bca6fe7bbd2c6a3, type: 2}
   - {fileID: 2100000, guid: dfeb1aa8d064b5348aa1ee7acbdfe79f, type: 2}
-  lightColor: 2
+  lightColor: 0
   lightColorInt: 0
   pedRend: {fileID: 7145373723105466419}
   lineRend: {fileID: 3307918219360728669}

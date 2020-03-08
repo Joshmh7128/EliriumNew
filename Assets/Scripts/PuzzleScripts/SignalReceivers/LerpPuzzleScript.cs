@@ -21,7 +21,7 @@ public class LerpPuzzleScript : MonoBehaviour
     /// <summary>
     /// The delay between the ball going in the pedestal and the puzzlePart starting to move, controllable from the editor
     /// </summary>
-    [Range(0, 5)] public int lerpLagTime = 1;
+    [Range(0, 5)] public float lerpLagTime = 1;
     /// <summary>
     /// The speed at which this puzzlePart moves, controllable from the editor
     /// </summary>

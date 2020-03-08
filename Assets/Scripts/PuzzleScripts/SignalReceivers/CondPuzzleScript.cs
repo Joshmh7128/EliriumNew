@@ -19,23 +19,26 @@ public class CondPuzzleScript : MonoBehaviour
 
     public void Activate(int activateColor, bool isActivated)
     {
-        foreach (PuzzlePartScript activated in puzzleParts)
+        if (puzzlePartMats.Count > 0)
         {
-            activated.Activate(activateColor, isActivated, gameObject);
+            foreach (PuzzlePartScript activated in puzzleParts)
+            {
+                activated.Activate(activateColor, isActivated, gameObject);
+            }
+
+            if (!collecting)
+            {
+                if (isActivated)
+                {
+                    SetColor(activateColor);
+                }
+                else
+                {
+                    SetColor(0);
+                }
+            }
         }
 
-        if (!collecting)
-        {
-            if (isActivated)
-            {
-                SetColor(activateColor);
-
-            }
-            else
-            {
-                SetColor(0);
-            }
-        }
     }
 
     // Update is called once per frame
