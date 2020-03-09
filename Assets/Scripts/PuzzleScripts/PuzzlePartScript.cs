@@ -64,4 +64,40 @@ public class PuzzlePartScript : MonoBehaviour
             collScript.Activate(activateColor, isActivated, source);
         }
     }
+
+    public int getColor()
+    {
+        if (mode == puzzlePartMode._Orb)
+        {
+            return _orbScript.orbColorInt;
+        }
+        else if (mode == puzzlePartMode.Trig)
+        {
+            return TrigScript.pedColorInt;
+        }
+        else if (mode == puzzlePartMode.Lght)
+        {
+            return lghtScript.lightColorInt;
+        }
+        else if (mode == puzzlePartMode.Lerp)
+        {
+            return -1;
+        }
+        else if (mode == puzzlePartMode.Anim)
+        {
+            return -1;
+        }
+        else if (mode == puzzlePartMode.Cond)
+        {
+            return -1;
+        }
+        else if (mode == puzzlePartMode.Coll)
+        {
+            return -1;
+        }
+        else
+        {
+            return -1;
+        }
+    }
 }

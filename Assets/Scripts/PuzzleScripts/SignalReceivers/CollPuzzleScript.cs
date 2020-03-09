@@ -7,16 +7,36 @@ public class CollPuzzleScript : MonoBehaviour
     [Tooltip("Does the order that the sources activate in matter?")] public bool inOrder = false;
     [Tooltip("The sources that activate this puzzlePart")] public List<GameObject> sources;
     [HideInInspector] public List<GameObject> usedSources;
+    [HideInInspector] public List<GameObject> colorSources;
     [Tooltip("The list of puzzle objects that this Collector activates")] public List<PuzzlePartScript> puzzleParts;
     /// <summary>
-    /// The number of times this Collector has been activated, used to keep track of 
+    /// The number of times this Collector has been activated, used to keep track of all of the sources
     /// </summary>
     [HideInInspector] public int numActivations;
+
+    public bool changeColor;
+    private Material targetMat;
+    public List<Material> puzzlePartMats;
+    public MeshRenderer collRend;
 
     private void Start()
     {
         usedSources = new List<GameObject>();
         numActivations = 0;
+        if (changeColor)
+        {
+            targetMat = new Material(puzzlePartMats[0]);
+            targetMat.SetColor("_Color", new Color(0,0,0));
+        }
+    }
+
+    private void Update()
+    {
+        if (changeColor)
+        {
+            collRend.material.Lerp(collRend.material, targetMat, 0.2f);
+        }
+
     }
 
     public void Activate(int activateColor, bool isActivated, GameObject source)
@@ -29,11 +49,20 @@ public class CollPuzzleScript : MonoBehaviour
                 {
                     numActivations++;
                     usedSources.Add(source);
-                    source.gameObject.GetComponent<CondPuzzleScript>().SetColor(activateColor);
+                    colorSources.Add(source);
+                    if (changeColor && source.GetComponent<PuzzlePartScript>().getColor() != -1) // If the collector changes colors, add this color to its set
+                    {
+                        SetColor();
+                    }
+                    if (source.gameObject.GetComponent<CondPuzzleScript>()) // If the source is a conduit, set its color
+                    {
+                        source.gameObject.GetComponent<CondPuzzleScript>().SetColor(activateColor);
+                    }
                     if (numActivations == sources.Count)
                     {
                         numActivations = 0;
                         usedSources = new List<GameObject>();
+                        colorSources = new List<GameObject>();
                         foreach (PuzzlePartScript activated in puzzleParts)
                         {
                             activated.Activate(activateColor, isActivated, gameObject);
@@ -44,23 +73,41 @@ public class CollPuzzleScript : MonoBehaviour
                 {
                     numActivations = 0;
                     usedSources = new List<GameObject>();
+                    colorSources = new List<GameObject>();
                 }
             }
             else if (isActivated && !usedSources.Contains(source))
             {
                 numActivations++;
                 usedSources.Add(source);
-                source.gameObject.GetComponent<CondPuzzleScript>().SetColor(activateColor);
+                colorSources.Add(source);
+                if (source.GetComponent<CondPuzzleScript>())
+                {
+                    source.gameObject.GetComponent<CondPuzzleScript>().SetColor(activateColor);
+                }
+                if (changeColor) // If the collector changes colors, add this color to its set
+                {
+                    SetColor();
+                }
                 if (numActivations == sources.Count)
                 {
                     numActivations = 0;
                     usedSources = new List<GameObject>();
+                    colorSources = new List<GameObject>();
+                    if (changeColor)
+                    {
+                        SetColor();
+                    }
                     foreach (PuzzlePartScript activated in puzzleParts)
                     {
                         activated.Activate(activateColor, isActivated, gameObject);
                     }
 
                 }
+            }
+            else if (!isActivated && changeColor && colorSources.Contains(source))
+            {
+                colorSources.Remove(source);
             }
             StartCoroutine(resetColors(activateColor, isActivated));
         }
@@ -77,5 +124,34 @@ public class CollPuzzleScript : MonoBehaviour
                 cond.GetComponent<CondPuzzleScript>().SetColor(0);
             }
         }
+    }
+
+    public void SetColor()
+    {
+        /*
+        if (numActivations == 1)
+        {
+            Debug.Log("firstActivation");
+            targetMat = new Material(puzzlePartMats[colorNum]);
+            targetMat.SetColor("_EmissionColor", puzzlePartMats[colorNum].color);
+        }
+        else
+        {
+            targetMat.color += puzzlePartMats[colorNum].color;
+
+
+            targetMat.color = new Color(Mathf.Clamp(targetMat.color.r, 0, 1), Mathf.Clamp(targetMat.color.g, 0, 1), Mathf.Clamp(targetMat.color.b, 0, 1));
+
+            targetMat.SetColor("_EmissionColor", targetMat.color);
+        }*/
+        targetMat.color = new Color(0, 0, 0);
+        targetMat.SetColor("_EmissionColor", new Color(0, 0, 0));
+        for (int i = 0; i < usedSources.Count; i++)
+        {
+            targetMat.color += puzzlePartMats[usedSources[i].GetComponent<PuzzlePartScript>().getColor()].color;
+            targetMat.SetColor("_EmissionColor", targetMat.color);
+        }
+
+        Debug.Log(targetMat.color);
     }
 }
