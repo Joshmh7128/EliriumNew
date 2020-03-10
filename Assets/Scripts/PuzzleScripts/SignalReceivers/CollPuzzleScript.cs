@@ -128,30 +128,12 @@ public class CollPuzzleScript : MonoBehaviour
 
     public void SetColor()
     {
-        /*
-        if (numActivations == 1)
-        {
-            Debug.Log("firstActivation");
-            targetMat = new Material(puzzlePartMats[colorNum]);
-            targetMat.SetColor("_EmissionColor", puzzlePartMats[colorNum].color);
-        }
-        else
-        {
-            targetMat.color += puzzlePartMats[colorNum].color;
-
-
-            targetMat.color = new Color(Mathf.Clamp(targetMat.color.r, 0, 1), Mathf.Clamp(targetMat.color.g, 0, 1), Mathf.Clamp(targetMat.color.b, 0, 1));
-
-            targetMat.SetColor("_EmissionColor", targetMat.color);
-        }*/
         targetMat.color = new Color(0, 0, 0);
         targetMat.SetColor("_EmissionColor", new Color(0, 0, 0));
-        for (int i = 0; i < usedSources.Count; i++)
-        {
-            targetMat.color += puzzlePartMats[usedSources[i].GetComponent<PuzzlePartScript>().getColor()].color;
-            targetMat.SetColor("_EmissionColor", targetMat.color);
-        }
 
-        Debug.Log(targetMat.color);
+        float colorFrac = (float)numActivations / (float)sources.Count;
+
+        targetMat.color = new Color(colorFrac, colorFrac, colorFrac);
+        targetMat.SetColor("_EmissionColor", targetMat.color);
     }
 }
