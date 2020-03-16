@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollPuzzleScript : MonoBehaviour
+public class CollPuzzleScript : PuzzlePartScript
 {
+    [Header("Collector Variables")]
     [Tooltip("Does the order that the sources activate in matter?")] public bool inOrder = false;
     [Tooltip("The sources that activate this puzzlePart")] public List<GameObject> sources;
     [HideInInspector] public List<GameObject> usedSources;
@@ -15,31 +16,25 @@ public class CollPuzzleScript : MonoBehaviour
     [HideInInspector] public int numActivations;
 
     public bool changeColor;
-    private Material targetMat;
-    public List<Material> puzzlePartMats;
-    public MeshRenderer collRend;
 
-    private void Start()
+    protected override void Start()
     {
+        puzzlePartRend = gameObject.GetComponent<MeshRenderer>();
         usedSources = new List<GameObject>();
         numActivations = 0;
+        
         if (changeColor)
         {
             targetMat = new Material(puzzlePartMats[0]);
             targetMat.SetColor("_Color", new Color(0,0,0));
         }
-    }
-
-    private void Update()
-    {
-        if (changeColor)
+        else
         {
-            collRend.material.Lerp(collRend.material, targetMat, 0.2f);
+            targetMat = puzzlePartRend.material;
         }
-
     }
 
-    public void Activate(int activateColor, bool isActivated, GameObject source)
+    public override void Activate(int activateColor, bool isActivated, GameObject source)
     {
         if (sources.Contains(source))
         {
@@ -50,9 +45,9 @@ public class CollPuzzleScript : MonoBehaviour
                     numActivations++;
                     usedSources.Add(source);
                     colorSources.Add(source);
-                    if (changeColor && source.GetComponent<PuzzlePartScript>().getColor() != -1) // If the collector changes colors, add this color to its set
+                    if (changeColor && source.GetComponent<PuzzlePartScript>().GetColor() != -1) // If the collector changes colors, add this color to its set
                     {
-                        SetColor();
+                        SetColor(0);
                     }
                     if (source.gameObject.GetComponent<CondPuzzleScript>()) // If the source is a conduit, set its color
                     {
@@ -87,7 +82,7 @@ public class CollPuzzleScript : MonoBehaviour
                 }
                 if (changeColor) // If the collector changes colors, add this color to its set
                 {
-                    SetColor();
+                    SetColor(0);
                 }
                 if (numActivations == sources.Count)
                 {
@@ -96,7 +91,7 @@ public class CollPuzzleScript : MonoBehaviour
                     colorSources = new List<GameObject>();
                     if (changeColor)
                     {
-                        SetColor();
+                        SetColor(0);
                     }
                     foreach (PuzzlePartScript activated in puzzleParts)
                     {
@@ -126,14 +121,18 @@ public class CollPuzzleScript : MonoBehaviour
         }
     }
 
-    public void SetColor()
+    public override void SetColor(int colorNum)
     {
-        targetMat.color = new Color(0, 0, 0);
-        targetMat.SetColor("_EmissionColor", new Color(0, 0, 0));
+        targetMat.color = puzzlePartRend.material.color;
+        if (changeColor)
+        {
+            targetMat.color = new Color(0, 0, 0);
+            targetMat.SetColor("_EmissionColor", new Color(0, 0, 0));
 
-        float colorFrac = (float)numActivations / (float)sources.Count;
+            float colorFrac = (float)numActivations / (float)sources.Count;
 
-        targetMat.color = new Color(colorFrac, colorFrac, colorFrac);
-        targetMat.SetColor("_EmissionColor", targetMat.color);
+            targetMat.color = new Color(colorFrac, colorFrac, colorFrac);
+            targetMat.SetColor("_EmissionColor", targetMat.color);
+        }
     }
 }

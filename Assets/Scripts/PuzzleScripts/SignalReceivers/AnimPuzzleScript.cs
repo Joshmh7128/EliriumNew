@@ -2,20 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimPuzzleScript : MonoBehaviour
+public class AnimPuzzleScript : PuzzlePartScript
 {
     /// <summary>
     /// The animator attached to this puzzlePart
     /// </summary>
-    public Animator animator;
+    [HideInInspector] public Animator animator;
     /// <summary>
     /// The list of booleans in the animator, used to trigger animations
     /// </summary>
     [HideInInspector] public List<string> animBoolList;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        animator = gameObject.GetComponent<Animator>();
+
         // Adds the animation bools to the list for internal use
         animBoolList.Add("white");
         animBoolList.Add("red");
@@ -24,7 +26,12 @@ public class AnimPuzzleScript : MonoBehaviour
         animBoolList.Add("purple");
     }
 
-    public void Activate(int activateColor, bool isActivated)
+    protected override void Update()
+    {
+
+    }
+
+    public override void Activate(int activateColor, bool isActivated, GameObject source)
     {
         if (isActivated) // Using animation system and ball entering pedestal
         {

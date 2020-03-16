@@ -2,33 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LghtPuzzleScript : MonoBehaviour
+public class LghtPuzzleScript : PuzzlePartScript
 {
-
-    public List<Material> orbMats;
-    public enum lightColorList { None, Red, Green, Blue, Purple }; //what color is our orb?
-    public lightColorList lightColor; //put it in the editor
-    public int lightColorInt;
-    public MeshRenderer pedRend;
+    [Header("Light variables")]
     public LineRenderer lineRend;
-    private Material targetMat;
 
     private RaycastHit lightHit;
     [Range(1,50)]public float rayLength = 15;
 
     private GameObject lastHit;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        SetColor((int)lightColor);
-        //lineRend = gameObject.GetComponent<LineRenderer>();
-    }
-
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        pedRend.material.Lerp(pedRend.material, targetMat, 0.2f);
+        base.Update();
 
         if (Physics.Raycast(transform.position, transform.forward, out lightHit, rayLength, 1) && lastHit == null)
         {
@@ -36,7 +23,7 @@ public class LghtPuzzleScript : MonoBehaviour
             //Debug.DrawRay(transform.position, transform.forward * lightHit.distance, Color.red);
             if (hitScript != null && lightHit.transform.tag != "LightBlocker")
             {
-                hitScript.Activate(lightColorInt, true, gameObject);
+                hitScript.Activate(puzzlePartColorInt, true, gameObject);
                 lineRend.SetPosition(1, transform.InverseTransformPoint(lightHit.point));
             }
             lastHit = lightHit.transform.gameObject;
@@ -47,7 +34,7 @@ public class LghtPuzzleScript : MonoBehaviour
             {
                 if (lastHit.GetComponent<PuzzlePartScript>() && lastHit.tag != "LightBlocker")
                 {
-                    lastHit.GetComponent<PuzzlePartScript>().Activate(lightColorInt, false, gameObject);
+                    lastHit.GetComponent<PuzzlePartScript>().Activate(puzzlePartColorInt, false, gameObject);
                 }
                 lastHit = null;
             }
@@ -60,7 +47,7 @@ public class LghtPuzzleScript : MonoBehaviour
             {
                 if (lastHit.GetComponent<PuzzlePartScript>() && lastHit.tag != "LightBlocker")
                 {
-                    lastHit.GetComponent<PuzzlePartScript>().Activate(lightColorInt, false, gameObject);
+                    lastHit.GetComponent<PuzzlePartScript>().Activate(puzzlePartColorInt, false, gameObject);
                 }
                 lastHit = null;
             }
@@ -71,22 +58,22 @@ public class LghtPuzzleScript : MonoBehaviour
         }
     }
 
-    public void Activate(int activateColor, bool isActivated)
+    public override void Activate(int activateColor, bool isActivated, GameObject source)
     {
-
+        
     }
 
     /// <summary>
     /// Updates the color of this emitter
     /// </summary>
     /// <param name="colorNum">The color to update to</param>
-    public void SetColor(int colorNum)
+    public override void SetColor(int colorNum)
     {
-        targetMat = orbMats[colorNum];
+        targetMat = puzzlePartMats[colorNum];
 
-        lineRend.material = orbMats[colorNum];
+        lineRend.material = puzzlePartMats[colorNum];
 
         // Cast the enum to an int
-        lightColorInt = colorNum;
+        puzzlePartColorInt = colorNum;
     }
 }

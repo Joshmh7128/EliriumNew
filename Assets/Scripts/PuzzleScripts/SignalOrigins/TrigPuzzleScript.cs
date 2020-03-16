@@ -2,30 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrigPuzzleScript : MonoBehaviour
+public class TrigPuzzleScript : PuzzlePartScript
 {
-
+    [Header("Trigger Variables")]
     [Tooltip("The orb detection trigger on this pedestal.")] public Collider orbDetect;
     [Tooltip("The list of puzzle objects that this pedestal activates")] public List<PuzzlePartScript> puzzleParts;
-
-    public List<Material> trigMats;
-    public enum pedColorList { None, Red, Green, Blue, Purple }; //what color is our orb?
-    public pedColorList pedColor; //put it in the editor
-    public int pedColorInt;
-    public MeshRenderer pedRend;
-    private Material targetMat;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        SetColor((int)pedColor);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        pedRend.material.Lerp(pedRend.material, targetMat, 0.2f);
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -34,9 +15,9 @@ public class TrigPuzzleScript : MonoBehaviour
             //Debug.Log("Orb in");
             foreach (PuzzlePartScript activated in puzzleParts)
             {
-                activated.Activate(other.GetComponent<Orb_PuzzleScript>().orbColorInt, true, gameObject);
+                activated.Activate(other.GetComponent<Orb_PuzzleScript>().puzzlePartColorInt, true, gameObject);
             }
-            SetColor(other.GetComponent<Orb_PuzzleScript>().orbColorInt);
+            SetColor(other.GetComponent<Orb_PuzzleScript>().puzzlePartColorInt);
         }
         else
         {
@@ -51,14 +32,14 @@ public class TrigPuzzleScript : MonoBehaviour
             //Debug.Log("Orb out");
             foreach(PuzzlePartScript activated in puzzleParts)
             {
-                activated.Activate(other.GetComponent<Orb_PuzzleScript>().orbColorInt, false, gameObject);
+                activated.Activate(other.GetComponent<Orb_PuzzleScript>().puzzlePartColorInt, false, gameObject);
             }
 
             SetColor(0);
         }
     }
 
-    public void Activate(int activateColor, bool isActivated)
+    public override void Activate(int activateColor, bool isActivated, GameObject source)
     {
         if (isActivated)
         {
@@ -66,20 +47,8 @@ public class TrigPuzzleScript : MonoBehaviour
         }
         else
         {
-            SetColor((int)pedColor);
+            SetColor((int)puzzlePartColor);
         }
 
-    }
-
-    /// <summary>
-    /// Updates the color of this pedestal
-    /// </summary>
-    /// <param name="colorNum">The color to update to</param>
-    public void SetColor(int colorNum)
-    {
-        targetMat = trigMats[colorNum];
-
-        // Cast the enum to an int
-        pedColorInt = colorNum;
     }
 }

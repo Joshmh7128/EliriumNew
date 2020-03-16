@@ -82,7 +82,6 @@ GameObject:
   - component: {fileID: 4680935008535074183}
   - component: {fileID: 4680935008535074182}
   - component: {fileID: 4680935008535074200}
-  - component: {fileID: 5722400153398429772}
   - component: {fileID: 7702757921099767004}
   m_Layer: 0
   m_Name: Template Orb
@@ -180,27 +179,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &5722400153398429772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4680935008535074202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2f744aaf8225414dacb7bfc28f7a04a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mode: 0
-  source: {fileID: 0}
-  _orbScript: {fileID: 7702757921099767004}
-  TrigScript: {fileID: 0}
-  lghtScript: {fileID: 0}
-  lerpScript: {fileID: 0}
-  animScript: {fileID: 0}
-  condScript: {fileID: 0}
-  collScript: {fileID: 0}
 --- !u!114 &7702757921099767004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,16 +191,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79cff6731e87c1a42a758481bd2ff1fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  holdPoint: {fileID: 0}
-  orbRigidBody: {fileID: 4680935008535074200}
-  startPos: {x: 0, y: 0, z: 0}
-  isHeld: 0
-  orbMats:
+  puzzlePartMats:
   - {fileID: 2100000, guid: 254295371fd4fd34681d330ecde34ae4, type: 2}
   - {fileID: 2100000, guid: c4c680929b2ae7646b875ff9bcd65dd6, type: 2}
   - {fileID: 2100000, guid: 4a5c0f68592b1ff4ca4c13fdd605dd7e, type: 2}
   - {fileID: 2100000, guid: ba915583b23b70a4b861b26898f2adf0, type: 2}
   - {fileID: 2100000, guid: 956d5198a7657c74293106edc12103c1, type: 2}
-  orbColor: 0
-  orbColorInt: 0
-  orbRend: {fileID: 4680935008535074183}
+  puzzlePartColor: 0
+  puzzlePartColorInt: 0
+  puzzlePartRend: {fileID: 0}
+  targetMat: {fileID: 0}
+  holdPoint: {fileID: 0}
+  orbRigidBody: {fileID: 4680935008535074200}
+  startPos: {x: 0, y: 0, z: 0}
+  isHeld: 0

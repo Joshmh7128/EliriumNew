@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1657894524845678883}
   - component: {fileID: 1657894524845678884}
   - component: {fileID: 1657894524845678885}
-  - component: {fileID: 7918938146318333168}
   - component: {fileID: 1163244857703518102}
   m_Layer: 0
   m_Name: Receiver
@@ -93,27 +92,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7918938146318333168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1657894524845678887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2f744aaf8225414dacb7bfc28f7a04a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mode: 5
-  source: {fileID: 0}
-  _orbScript: {fileID: 0}
-  TrigScript: {fileID: 0}
-  lghtScript: {fileID: 0}
-  lerpScript: {fileID: 0}
-  animScript: {fileID: 0}
-  condScript: {fileID: 1163244857703518102}
-  collScript: {fileID: 0}
 --- !u!114 &1163244857703518102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,11 +104,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6fec3cb746155c43b23900dfc21811b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collecting: 0
-  puzzleParts: []
   puzzlePartMats:
   - {fileID: 2100000, guid: 254295371fd4fd34681d330ecde34ae4, type: 2}
   - {fileID: 2100000, guid: c4c680929b2ae7646b875ff9bcd65dd6, type: 2}
   - {fileID: 2100000, guid: 4a5c0f68592b1ff4ca4c13fdd605dd7e, type: 2}
   - {fileID: 2100000, guid: ba915583b23b70a4b861b26898f2adf0, type: 2}
   - {fileID: 2100000, guid: 956d5198a7657c74293106edc12103c1, type: 2}
+  puzzlePartColor: 0
+  puzzlePartColorInt: 0
+  puzzlePartRend: {fileID: 0}
+  targetMat: {fileID: 0}
+  collecting: 0
+  puzzleParts: []

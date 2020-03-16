@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MyBox;
 
-public class LerpPuzzleScript : MonoBehaviour
+public class LerpPuzzleScript : PuzzlePartScript
 {
     #region Inspector Variables
     /// <summary>
@@ -13,11 +13,8 @@ public class LerpPuzzleScript : MonoBehaviour
     /// <summary>
     /// Distinguishes between speed-based and duration-based lerping, for puzzles which require tight coordination between elements
     /// </summary>
+    [Header("Lerp Variables")]
     public lerpMode lerpStyle;
-    /// <summary>
-    /// The list of vector3 positions this puzzlePart can lerp to
-    /// </summary>
-    [HideInInspector] public List<Vector3> lerpActions;
     /// <summary>
     /// The delay between the ball going in the pedestal and the puzzlePart starting to move, controllable from the editor
     /// </summary>
@@ -34,6 +31,10 @@ public class LerpPuzzleScript : MonoBehaviour
     /// If true, the puzzlePart will only move one way. This allows for gates that open and stay open behind the player as they move forwards
     /// </summary>
     public bool oneWay = false;
+    /// <summary>
+    /// The list of vector3 positions this puzzlePart can lerp to
+    /// </summary>
+    [HideInInspector] public List<Vector3> lerpActions;
     /// <summary>
     /// One of the vector3 positions that this puzzlePart can lerp to
     /// </summary> // This one is separate to allow the header in-editor
@@ -80,7 +81,7 @@ public class LerpPuzzleScript : MonoBehaviour
     #endregion
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         // Add the lerp actions to the list for internal use
         lerpActions.Add(whiteLerpAction);
@@ -105,7 +106,7 @@ public class LerpPuzzleScript : MonoBehaviour
     /// </summary>
     /// <param name="activateColor">The color of the orb entering/leaving the pedestal</param>
     /// <param name="isActivated">Determines whether the orb is entering or leaving the pedestal</param>
-    public void Activate(int activateColor, bool isActivated)
+    public override void Activate(int activateColor, bool isActivated, GameObject source)
     {
         if (isActivated == true && lerpActions[activateColor] != new Vector3(-999, -999, -999)) // Orb is in pedestal and this object should do something
         {
@@ -124,7 +125,7 @@ public class LerpPuzzleScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         if (Vector3.Distance(transform.position, target) > .1) // If the target is not ~= the current position
         {

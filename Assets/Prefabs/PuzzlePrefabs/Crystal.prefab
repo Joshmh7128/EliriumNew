@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7145373723105466419}
   - component: {fileID: 7145373723105466418}
   - component: {fileID: 7145373723105466417}
-  - component: {fileID: 8357885574443299791}
   - component: {fileID: 7145373723105466429}
   - component: {fileID: 3307918219360728669}
   m_Layer: 0
@@ -795,27 +794,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 0}
---- !u!114 &8357885574443299791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7145373723105466423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2f744aaf8225414dacb7bfc28f7a04a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mode: 2
-  source: {fileID: 0}
-  _orbScript: {fileID: 0}
-  TrigScript: {fileID: 0}
-  lghtScript: {fileID: 7145373723105466429}
-  lerpScript: {fileID: 0}
-  animScript: {fileID: 0}
-  condScript: {fileID: 0}
-  collScript: {fileID: 0}
 --- !u!114 &7145373723105466429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -828,15 +806,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c4b8d8383126604ca6bce79e0eedc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orbMats:
+  puzzlePartMats:
   - {fileID: 2100000, guid: 02d6f4799400d76438643325faaa6d5e, type: 2}
   - {fileID: 2100000, guid: 156ae198df9d1aa419f506025884dbaf, type: 2}
   - {fileID: 2100000, guid: f5963c4df201d41489aa3d100a483104, type: 2}
   - {fileID: 2100000, guid: 1f67437d4f0e72c46bca6fe7bbd2c6a3, type: 2}
   - {fileID: 2100000, guid: dfeb1aa8d064b5348aa1ee7acbdfe79f, type: 2}
-  lightColor: 0
-  lightColorInt: 0
-  pedRend: {fileID: 7145373723105466419}
+  puzzlePartColor: 0
+  puzzlePartColorInt: 0
+  puzzlePartRend: {fileID: 0}
+  targetMat: {fileID: 0}
   lineRend: {fileID: 3307918219360728669}
   rayLength: 20
 --- !u!120 &3307918219360728669
