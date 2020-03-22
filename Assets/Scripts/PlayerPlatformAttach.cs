@@ -19,7 +19,7 @@ public class PlayerPlatformAttach : MonoBehaviour
 
 	private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject == Player || other.CompareTag("Orb"))
+        if (other.gameObject == Player || other.GetComponent<Orb_PuzzleScript>())
         {
 			if (other.transform.parent == null)
 			{
@@ -30,7 +30,7 @@ public class PlayerPlatformAttach : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject == Player || other.CompareTag("Orb"))
+        if (other.gameObject == Player || other.GetComponent<Orb_PuzzleScript>())
         {
 			if(other.transform.parent == transform)
 				other.transform.parent = null;

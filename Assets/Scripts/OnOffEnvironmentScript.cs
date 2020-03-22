@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class OnOffEnvironmentScript : ReactantScript
 {   //our four checks
-    public OrbScript.orbColorList checkColorAlpha;
-    public OrbScript.orbColorList checkColorBeta;
-    public OrbScript.orbColorList checkColorGamma;
-    public OrbScript.orbColorList checkColorDelta;
+    //public Orb_PuzzleScript.orbColorList checkColorAlpha;
+    //public Orb_PuzzleScript.orbColorList checkColorBeta;
+    //public Orb_PuzzleScript.orbColorList checkColorGamma;
+    //public Orb_PuzzleScript.orbColorList checkColorDelta;
     //is it on?
     public bool isOn;
     //first use?

@@ -81,11 +81,11 @@ GameObject:
   - component: {fileID: 4680935008535074180}
   - component: {fileID: 4680935008535074183}
   - component: {fileID: 4680935008535074182}
-  - component: {fileID: 4680935008535074201}
   - component: {fileID: 4680935008535074200}
+  - component: {fileID: 7702757921099767004}
   m_Layer: 0
   m_Name: Template Orb
-  m_TagString: Orb
+  m_TagString: LightBlocker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,7 +112,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4680935008535074202}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300012, guid: 9a7f477e2db071d4a80efe43e531ea69, type: 3}
 --- !u!23 &4680935008535074183
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -161,33 +161,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.57
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4680935008535074201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4680935008535074202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8eb305d551024b245b9bb04584a28bde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  holdPoint: {fileID: 0}
-  orbRigidBody: {fileID: 0}
-  isHeld: 0
-  orbMats:
-  - {fileID: 2100000, guid: 650b220a779a498488fcce6f39381c18, type: 2}
-  - {fileID: 2100000, guid: c4c680929b2ae7646b875ff9bcd65dd6, type: 2}
-  - {fileID: 2100000, guid: 4a5c0f68592b1ff4ca4c13fdd605dd7e, type: 2}
-  - {fileID: 2100000, guid: ba915583b23b70a4b861b26898f2adf0, type: 2}
-  - {fileID: 2100000, guid: 956d5198a7657c74293106edc12103c1, type: 2}
-  orbColor: 0
-  orbColorInt: 0
-  orbRend: {fileID: 4680935008535074183}
-  startPos: {x: 0, y: 0, z: 0}
 --- !u!54 &4680935008535074200
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -204,3 +179,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &7702757921099767004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4680935008535074202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79cff6731e87c1a42a758481bd2ff1fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  puzzlePartMats:
+  - {fileID: 2100000, guid: 254295371fd4fd34681d330ecde34ae4, type: 2}
+  - {fileID: 2100000, guid: c4c680929b2ae7646b875ff9bcd65dd6, type: 2}
+  - {fileID: 2100000, guid: 4a5c0f68592b1ff4ca4c13fdd605dd7e, type: 2}
+  - {fileID: 2100000, guid: ba915583b23b70a4b861b26898f2adf0, type: 2}
+  - {fileID: 2100000, guid: 956d5198a7657c74293106edc12103c1, type: 2}
+  puzzlePartColor: 0
+  puzzlePartColorInt: 0
+  puzzlePartRend: {fileID: 0}
+  targetMat: {fileID: 0}
+  holdPoint: {fileID: 0}
+  orbRigidBody: {fileID: 4680935008535074200}
+  startPos: {x: 0, y: 0, z: 0}
+  isHeld: 0

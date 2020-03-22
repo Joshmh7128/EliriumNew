@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6473599495658776741}
   - component: {fileID: 7098534610554636570}
   - component: {fileID: 579987816732269292}
-  - component: {fileID: 2099961127}
+  - component: {fileID: 9180021296211507343}
   m_Layer: 0
   m_Name: GenericPedestal
   m_TagString: Untagged
@@ -107,7 +107,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: 90d5d1d0ecbd28d47be84dcc1f9fa73d, type: 3}
---- !u!114 &2099961127
+--- !u!114 &9180021296211507343
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,17 +116,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 6473599495656519269}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f8d5a37d18cb0a428a9f1d74a7aaa06, type: 3}
+  m_Script: {fileID: 11500000, guid: 5dc103524d3550d4eb07fad39aea046e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orbDetect: {fileID: 7098534610554636570}
-  puzzleParts: []
-  orbMats:
+  puzzlePartMats:
   - {fileID: 2100000, guid: 254295371fd4fd34681d330ecde34ae4, type: 2}
   - {fileID: 2100000, guid: c4c680929b2ae7646b875ff9bcd65dd6, type: 2}
   - {fileID: 2100000, guid: 4a5c0f68592b1ff4ca4c13fdd605dd7e, type: 2}
   - {fileID: 2100000, guid: ba915583b23b70a4b861b26898f2adf0, type: 2}
   - {fileID: 2100000, guid: 956d5198a7657c74293106edc12103c1, type: 2}
-  pedColor: 0
-  pedColorInt: 0
-  pedRend: {fileID: 6473599495658776741}
+  puzzlePartColor: 0
+  puzzlePartColorInt: 0
+  puzzlePartRend: {fileID: 0}
+  targetMat: {fileID: 0}
+  orbDetect: {fileID: 7098534610554636570}
+  puzzleParts: []

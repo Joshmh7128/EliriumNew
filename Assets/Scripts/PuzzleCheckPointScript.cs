@@ -5,7 +5,7 @@ using UnityEngine;
 public class PuzzleCheckPointScript : MonoBehaviour
 {
     public Vector3 playerPos; //where will we move the player to?
-    public OrbScript[] puzzleOrbs;  //our orbs per checkpoint
+    public Orb_PuzzleScript[] puzzleOrbs;  //our orbs per checkpoint
     public int currentPart;
     public int myPart;
 
@@ -28,7 +28,7 @@ public class PuzzleCheckPointScript : MonoBehaviour
         if (currentPart == myPart)
         {
             //go through our array of orbs and reset every one of their positions
-            foreach (OrbScript orbScript in puzzleOrbs)
+            foreach (Orb_PuzzleScript orbScript in puzzleOrbs)
             {
                 orbScript.ResetPos();
             }

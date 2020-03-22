@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class MultiStateEnvironmentScript : ReactantScript
 {   //define our possible checks
-    public OrbScript.orbColorList checkColorAlpha;
-    public OrbScript.orbColorList checkColorBeta;
-    public OrbScript.orbColorList checkColorGamma;
-    public OrbScript.orbColorList checkColorDelta;
+    /*public Orb_PuzzleScript.orbColorList checkColorAlpha;
+    public Orb_PuzzleScript.orbColorList checkColorBeta;
+    public Orb_PuzzleScript.orbColorList checkColorGamma;
+    public Orb_PuzzleScript.orbColorList checkColorDelta;
     //define our possible states
     public enum environmentStateList
     {
@@ -64,11 +64,11 @@ public class MultiStateEnvironmentScript : ReactantScript
             }
         }   
     }
-
+    */
     public override void React(int color)
     {
         //this sets the desired state
-        if (color == (int)checkColorAlpha)
+        /*if (color == (int)checkColorAlpha)
         {
             desiredEnvironmentState = environmentStateList.stateAlpha;
         }
@@ -76,15 +76,15 @@ public class MultiStateEnvironmentScript : ReactantScript
         if (color == (int)checkColorBeta)
         {
             desiredEnvironmentState = environmentStateList.stateBeta;
-        }
+        }*/
     }
-
+    
     public override void Deact()
     {
-        desiredEnvironmentState = environmentStateList.none;
-        ReturnToNone(currentEnvironmentState);
+        //desiredEnvironmentState = environmentStateList.none;
+        //ReturnToNone(currentEnvironmentState);
     }
-
+    /*
     public void ReturnToNone(environmentStateList currentState)
     {
         //set all go back states
@@ -116,5 +116,5 @@ public class MultiStateEnvironmentScript : ReactantScript
         currentEnvironmentState = setState; 
         isIdle = setIdle;
     }
-
+    */
 }
