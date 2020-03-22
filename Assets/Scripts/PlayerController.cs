@@ -99,18 +99,18 @@ public class PlayerController : MonoBehaviour
         //Places the crosshair in the middle of the screen
         GameObject qui = new GameObject("AutoCrosshair");
         qui.AddComponent<RectTransform>();
-        qui.AddComponent<Canvas>();
+        qui.AddComponent<Canvas>();/*
         qui.AddComponent<CanvasScaler>();
         qui.AddComponent<GraphicRaycaster>();
         qui.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
         GameObject quic = new GameObject("Crosshair");
         quic.AddComponent<Image>().sprite = Crosshair;
-        qui.transform.localScale *= 2;
+        qui.transform.localScale *= 2;*/
 
         qui.transform.SetParent(this.transform);
-        qui.transform.position = Vector3.zero;
+        qui.transform.position = Vector3.zero;/*
         quic.transform.SetParent(qui.transform);
-        quic.transform.position = Vector3.zero;
+        quic.transform.position = Vector3.zero;*/
 
         cameraStartingPosition = playerCamera.localPosition;
         Cursor.lockState = CursorLockMode.Locked; Cursor.visible = false;
