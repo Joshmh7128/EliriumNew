@@ -31,6 +31,12 @@ public class AnimPuzzleScript : PuzzlePartScript
 
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="activateColor">The color of the signal entering the puzzlePart.</param>
+    /// <param name="isActivated">The boolean value of the signal. True = signal starts, False = signal stops.</param>
+    /// <param name="source">The GameObject sending the signal.</param>
     public override void Activate(int activateColor, bool isActivated, GameObject source)
     {
         if (isActivated) // Using animation system and ball entering pedestal

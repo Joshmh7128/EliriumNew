@@ -16,8 +16,9 @@ public class LghtPuzzleScript : PuzzlePartScript
 
     protected override void Start()
     {
-        base.Start();
         lineRend = gameObject.GetComponent<LineRenderer>();
+
+        base.Start();
         if (isLens)
         {
             isActive = false;
@@ -73,6 +74,12 @@ public class LghtPuzzleScript : PuzzlePartScript
         }        
     }
 
+    /// <summary>
+    /// Watch this space.
+    /// </summary>
+    /// <param name="activateColor">The color of the signal entering the puzzlePart.</param>
+    /// <param name="isActivated">The boolean value of the signal. True = signal starts, False = signal stops.</param>
+    /// <param name="source">The GameObject sending the signal.</param>
     public override void Activate(int activateColor, bool isActivated, GameObject source)
     {
         if (isLens)
