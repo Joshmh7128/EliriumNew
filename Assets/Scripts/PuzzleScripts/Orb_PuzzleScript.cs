@@ -57,9 +57,9 @@ public class Orb_PuzzleScript : PuzzlePartScript
     /// <summary>
     /// Resets the position of this orb. Used in the Checkpoint system.
     /// </summary>
-    public void ResetPos()
+    public void ResetPos(Vector3 pos)
     {
-        transform.position = startPos;
+        transform.position = pos;
         orbRigidBody.velocity = new Vector3(0, 0, 0);
     }
 }

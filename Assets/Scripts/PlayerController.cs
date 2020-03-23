@@ -303,4 +303,10 @@ public class PlayerController : MonoBehaviour
         }
         #endregion
     }
+
+    public void ResetPos(Vector3 pos)
+    {
+        transform.position = pos;
+        fps_RigidBody.velocity = new Vector3(0, 0, 0);
+    }
 }
