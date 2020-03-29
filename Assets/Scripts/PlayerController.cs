@@ -91,6 +91,8 @@ public class PlayerController : MonoBehaviour
         fps_RigidBody = GetComponent<Rigidbody>();
         _crouchModifiers.colliderHeight = capsule.height;
         #endregion
+
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
