@@ -8,11 +8,12 @@ public class CheckpointManager : MonoBehaviour
     public List<Vector3> orbPositions = new List<Vector3>();
 
     public PlayerController player;
-    private List<Orb_PuzzleScript> orbs = new List<Orb_PuzzleScript>();
+    public static List<Orb_PuzzleScript> Orbs { get; set; } = new List<Orb_PuzzleScript>();
 
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(player.gameObject);
 
         UpdateOrbs();
 
@@ -31,11 +32,11 @@ public class CheckpointManager : MonoBehaviour
     {
         player.ResetPos(playerPosition);
 
-        for (int i = 0; i < orbs.Count; i++)
+        for (int i = 0; i < Orbs.Count; i++)
         {
-            if (orbs[i] != null)
+            if (Orbs[i] != null)
             {
-                orbs[i].ResetPos(orbPositions[i]);
+                Orbs[i].ResetPos(orbPositions[i]);
             }
             
         }
@@ -43,14 +44,14 @@ public class CheckpointManager : MonoBehaviour
 
     public void UpdateOrbs()
     {
-        orbs = new List<Orb_PuzzleScript>();
+        Orbs = new List<Orb_PuzzleScript>();
         orbPositions = new List<Vector3>();
         Orb_PuzzleScript[] orbArray = FindObjectsOfType<Orb_PuzzleScript>();
         Debug.Log(orbArray.Length);
         for (int i = 0; i < orbArray.Length; i++)
         {
-            orbs.Add(orbArray[i]);
-            orbPositions.Add(orbs[i].transform.position);
+            Orbs.Add(orbArray[i]);
+            orbPositions.Add(Orbs[i].transform.position);
         }
     }
 
@@ -61,9 +62,14 @@ public class CheckpointManager : MonoBehaviour
 
     public void UpdateOrbPos(Vector3 pos, Orb_PuzzleScript orb)
     {
-        if (orbs.Contains(orb))
+        if (Orbs.Contains(orb))
         {
-            orbPositions[orbs.IndexOf(orb)] = pos;
+            orbPositions[Orbs.IndexOf(orb)] = pos;
         }
+    }
+
+    public void SavePlayer()
+    {
+        DontDestroyOnLoad(player.gameObject);
     }
 }

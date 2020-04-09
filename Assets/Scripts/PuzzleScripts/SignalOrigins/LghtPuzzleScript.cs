@@ -38,7 +38,7 @@ public class LghtPuzzleScript : PuzzlePartScript
                 //Debug.DrawRay(transform.position, transform.forward * lightHit.distance, Color.red);
                 if (hitScript != null && lightHit.transform.tag != "LightBlocker")
                 {
-                    hitScript.Activate(puzzlePartColorInt, true, gameObject);
+                    hitScript.Activate(PuzzlePartColorInt, true, gameObject);
                     lineRend.SetPosition(1, transform.InverseTransformPoint(lightHit.point));
                 }
                 lastHit = lightHit.transform.gameObject;
@@ -49,7 +49,7 @@ public class LghtPuzzleScript : PuzzlePartScript
                 {
                     if (lastHit.GetComponent<PuzzlePartScript>() && lastHit.tag != "LightBlocker")
                     {
-                        lastHit.GetComponent<PuzzlePartScript>().Activate(puzzlePartColorInt, false, gameObject);
+                        lastHit.GetComponent<PuzzlePartScript>().Activate(PuzzlePartColorInt, false, gameObject);
                     }
                     lastHit = null;
                 }
@@ -62,7 +62,7 @@ public class LghtPuzzleScript : PuzzlePartScript
                 {
                     if (lastHit.GetComponent<PuzzlePartScript>() && lastHit.tag != "LightBlocker")
                     {
-                        lastHit.GetComponent<PuzzlePartScript>().Activate(puzzlePartColorInt, false, gameObject);
+                        lastHit.GetComponent<PuzzlePartScript>().Activate(PuzzlePartColorInt, false, gameObject);
                     }
                     lastHit = null;
                 }
@@ -103,11 +103,8 @@ public class LghtPuzzleScript : PuzzlePartScript
     /// <param name="colorNum">The color to update to</param>
     public override void SetColor(int colorNum)
     {
-        targetMat = puzzlePartMats[colorNum];
+        base.SetColor(colorNum);
 
         lineRend.material = puzzlePartMats[colorNum];
-
-        // Cast the enum to an int
-        puzzlePartColorInt = colorNum;
     }
 }

@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class AreaLoadCheckpoint : Checkpoint
 {
-    public string sceneName;
+    public string loadedScene;
+    public string unloadedScene;
 
     private bool isLoaded = false;
 
@@ -16,8 +17,23 @@ public class AreaLoadCheckpoint : Checkpoint
         if (!isLoaded && other.CompareTag("Player"))
         {
             isLoaded = true;
-            SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
-            manager.UpdateOrbs();
+            //SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+            //SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+            StartCoroutine("LoadScene");
         }
+    }
+
+    private IEnumerator LoadScene()
+    {
+        if (unloadedScene != "")
+        {
+            var unloadedLevel = SceneManager.UnloadSceneAsync(unloadedScene);
+            yield return unloadedLevel;
+        }
+        var loadedLevel = SceneManager.LoadSceneAsync(loadedScene, LoadSceneMode.Additive);
+        yield return loadedLevel;
+
+        manager.UpdateOrbs();
+        manager.SavePlayer();
     }
 }

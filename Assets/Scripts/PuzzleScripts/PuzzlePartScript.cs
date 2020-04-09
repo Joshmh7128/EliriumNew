@@ -7,16 +7,20 @@ public class PuzzlePartScript : MonoBehaviour
 {
 
     #region Inspector Variables
-    [Header("PuzzlePart Variables")]
-    [Tooltip("The materials for use in the SetColor() script. Materials can be found in Assets/Materials/Puzzle Materials.")] public List<Material> puzzlePartMats;
+    
     public enum puzzlePartColorPicker { White, Red, Green, Blue, Purple }; // Base enum for the signal colors.
+    [Header("PuzzlePart Variables")]
     [Tooltip("Editor instance of puzzlePartColorPicker. Used in signal sending/receiving and color switching.")]public puzzlePartColorPicker puzzlePartColor = puzzlePartColorPicker.White;
+    [Tooltip("The materials for use in the SetColor() script. Materials can be found in Assets/Materials/Puzzle Materials.")] public List<Material> puzzlePartMats;
     #endregion
 
     #region Internal Variables
-    [HideInInspector, Tooltip("Int value of this puzzlePart's color. Assigned in SetColor(), can be accessed through GetColor().")] public int puzzlePartColorInt;
-    [HideInInspector, Tooltip("The MeshRenderer component of this GameObject.")] public MeshRenderer puzzlePartRend;
-    [HideInInspector, Tooltip("The target material, set in SetColor() and used to change color in Update().")] public Material targetMat;
+    /// <summary>
+    /// Int form of this puzzlePart's color value.
+    /// </summary>
+    public int PuzzlePartColorInt { get; private set; }
+    [Tooltip("The MeshRenderer component of this GameObject.")] protected MeshRenderer puzzlePartRend;
+    [Tooltip("The target material, set in SetColor() and used to change color in Update().")] protected Material targetMat;
     #endregion
 
     /// <summary>
@@ -55,15 +59,6 @@ public class PuzzlePartScript : MonoBehaviour
     {
         targetMat = puzzlePartMats[colorNum]; // Color moves to target in Update() with material.lerp().
 
-        puzzlePartColorInt = colorNum; // Updates colorNum for this puzzlePart.
-    }
-
-    /// <summary>
-    /// Returns the int value of this puzzlePart's current color. Set in inspector, can be changed with SetColor().
-    /// </summary>
-    /// <returns></returns>
-    public virtual int GetColor()
-    {
-        return puzzlePartColorInt;
+        PuzzlePartColorInt = colorNum; // Updates colorNum for this puzzlePart.
     }
 }

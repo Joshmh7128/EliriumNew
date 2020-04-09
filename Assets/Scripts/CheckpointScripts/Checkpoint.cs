@@ -13,6 +13,7 @@ public class Checkpoint : MonoBehaviour
     private void Awake()
     {
         manager = FindObjectOfType<CheckpointManager>();
+        
     }
 
     public virtual void OnTriggerEnter(Collider other)

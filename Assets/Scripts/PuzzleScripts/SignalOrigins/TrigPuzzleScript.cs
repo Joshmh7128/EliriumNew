@@ -21,9 +21,9 @@ public class TrigPuzzleScript : PuzzlePartScript
             //Debug.Log("Orb in");
             foreach (PuzzlePartScript activated in puzzleParts)
             {
-                activated.Activate(orbColl.GetComponent<Orb_PuzzleScript>().puzzlePartColorInt, true, gameObject);
+                activated.Activate(orbColl.GetComponent<Orb_PuzzleScript>().PuzzlePartColorInt, true, gameObject);
             }
-            SetColor(orbColl.GetComponent<Orb_PuzzleScript>().puzzlePartColorInt);
+            SetColor(orbColl.GetComponent<Orb_PuzzleScript>().PuzzlePartColorInt);
         }
         else
         {
@@ -42,7 +42,7 @@ public class TrigPuzzleScript : PuzzlePartScript
             //Debug.Log("Orb out");
             foreach(PuzzlePartScript activated in puzzleParts)
             {
-                activated.Activate(other.GetComponent<Orb_PuzzleScript>().puzzlePartColorInt, false, gameObject);
+                activated.Activate(other.GetComponent<Orb_PuzzleScript>().PuzzlePartColorInt, false, gameObject);
             }
 
             SetColor(0);
