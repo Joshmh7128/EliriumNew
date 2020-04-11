@@ -16,8 +16,9 @@ public class LghtPuzzleScript : PuzzlePartScript
 
     protected override void Start()
     {
-        base.Start();
         lineRend = gameObject.GetComponent<LineRenderer>();
+
+        base.Start();
         if (isLens)
         {
             isActive = false;
@@ -37,7 +38,7 @@ public class LghtPuzzleScript : PuzzlePartScript
                 //Debug.DrawRay(transform.position, transform.forward * lightHit.distance, Color.red);
                 if (hitScript != null && lightHit.transform.tag != "LightBlocker")
                 {
-                    hitScript.Activate(puzzlePartColorInt, true, gameObject);
+                    hitScript.Activate(PuzzlePartColorInt, true, gameObject);
                     lineRend.SetPosition(1, transform.InverseTransformPoint(lightHit.point));
                 }
                 lastHit = lightHit.transform.gameObject;
@@ -48,7 +49,7 @@ public class LghtPuzzleScript : PuzzlePartScript
                 {
                     if (lastHit.GetComponent<PuzzlePartScript>() && lastHit.tag != "LightBlocker")
                     {
-                        lastHit.GetComponent<PuzzlePartScript>().Activate(puzzlePartColorInt, false, gameObject);
+                        lastHit.GetComponent<PuzzlePartScript>().Activate(PuzzlePartColorInt, false, gameObject);
                     }
                     lastHit = null;
                 }
@@ -61,7 +62,7 @@ public class LghtPuzzleScript : PuzzlePartScript
                 {
                     if (lastHit.GetComponent<PuzzlePartScript>() && lastHit.tag != "LightBlocker")
                     {
-                        lastHit.GetComponent<PuzzlePartScript>().Activate(puzzlePartColorInt, false, gameObject);
+                        lastHit.GetComponent<PuzzlePartScript>().Activate(PuzzlePartColorInt, false, gameObject);
                     }
                     lastHit = null;
                 }
@@ -73,6 +74,12 @@ public class LghtPuzzleScript : PuzzlePartScript
         }        
     }
 
+    /// <summary>
+    /// Watch this space.
+    /// </summary>
+    /// <param name="activateColor">The color of the signal entering the puzzlePart.</param>
+    /// <param name="isActivated">The boolean value of the signal. True = signal starts, False = signal stops.</param>
+    /// <param name="source">The GameObject sending the signal.</param>
     public override void Activate(int activateColor, bool isActivated, GameObject source)
     {
         if (isLens)
@@ -96,11 +103,8 @@ public class LghtPuzzleScript : PuzzlePartScript
     /// <param name="colorNum">The color to update to</param>
     public override void SetColor(int colorNum)
     {
-        targetMat = puzzlePartMats[colorNum];
+        base.SetColor(colorNum);
 
         lineRend.material = puzzlePartMats[colorNum];
-
-        // Cast the enum to an int
-        puzzlePartColorInt = colorNum;
     }
 }

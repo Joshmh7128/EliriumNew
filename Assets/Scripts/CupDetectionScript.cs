@@ -45,7 +45,7 @@ public class CupDetectionScript : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Orb"))
         {   //get the casted Int from our orbscript, then turn that Int back into the proper list
-            heldColorInt = col.gameObject.GetComponent<Orb_PuzzleScript>().puzzlePartColorInt;
+            heldColorInt = col.gameObject.GetComponent<Orb_PuzzleScript>().PuzzlePartColorInt;
             heldColor = (heldColorList)heldColorInt;
             cupActive = true; //is the cup holding something?
             isReacting = true; //are we reacting or deacting?

@@ -104,8 +104,9 @@ public class LerpPuzzleScript : PuzzlePartScript
     /// <summary>
     /// The main function of this script, takes the input from the pedestal and activates the appropriate action
     /// </summary>
-    /// <param name="activateColor">The color of the orb entering/leaving the pedestal</param>
-    /// <param name="isActivated">Determines whether the orb is entering or leaving the pedestal</param>
+    /// <param name="activateColor">The color of the signal entering the puzzlePart.</param>
+    /// <param name="isActivated">The boolean value of the signal. True = signal starts, False = signal stops.</param>
+    /// <param name="source">The GameObject sending the signal.</param>
     public override void Activate(int activateColor, bool isActivated, GameObject source)
     {
         if (isActivated == true && lerpActions[activateColor] != new Vector3(-999, -999, -999)) // Orb is in pedestal and this object should do something

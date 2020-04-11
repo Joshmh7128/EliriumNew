@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Levels/Caves Area 1 JoshBranch.unity
+    path: Assets/Scenes/Levels/Caves Area 1 - Rob.unity
     guid: 79c7d90227584454485ce31a9ca08bd5
+  - enabled: 1
+    path: Assets/Scenes/Levels/Caves Area 2 - Rob.unity
+    guid: 4350edc3ccac3254683ead2777310045
+  - enabled: 1
+    path: Assets/Scenes/Levels/Caves Area 3.unity
+    guid: 060549e33c7857345b5bb25c35421460
   m_configObjects: {}

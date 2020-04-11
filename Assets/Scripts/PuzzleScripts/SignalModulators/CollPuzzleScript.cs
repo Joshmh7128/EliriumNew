@@ -45,7 +45,7 @@ public class CollPuzzleScript : PuzzlePartScript
                     numActivations++;
                     usedSources.Add(source);
                     colorSources.Add(source);
-                    if (changeColor && source.GetComponent<PuzzlePartScript>().GetColor() != -1) // If the collector changes colors, add this color to its set
+                    if (changeColor && source.GetComponent<PuzzlePartScript>().PuzzlePartColorInt != -1) // If the collector changes colors, add this color to its set
                     {
                         SetColor(0);
                     }
