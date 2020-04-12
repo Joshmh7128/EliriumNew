@@ -4582,6 +4582,16 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5586500620500492704, guid: 6558360678ccb684eb2507138b3d8daf,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2673212166677407856, guid: 6558360678ccb684eb2507138b3d8daf,
+        type: 3}
+      propertyPath: shadowMapRenderTexture
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3483049363997840028, guid: 6558360678ccb684eb2507138b3d8daf,
         type: 3}
       propertyPath: m_SelectedFaces.Array.size
@@ -6432,15 +6442,10 @@ PrefabInstance:
       propertyPath: m_SelectedVertices.Array.data[23]
       value: 44
       objectReference: {fileID: 0}
-    - target: {fileID: 5586500620500492704, guid: 6558360678ccb684eb2507138b3d8daf,
+    - target: {fileID: 7279717118550954604, guid: 6558360678ccb684eb2507138b3d8daf,
         type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2673212166677407856, guid: 6558360678ccb684eb2507138b3d8daf,
-        type: 3}
-      propertyPath: shadowMapRenderTexture
-      value: 
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6558360678ccb684eb2507138b3d8daf, type: 3}
@@ -6535,6 +6540,16 @@ PrefabInstance:
     - target: {fileID: 6635128033282556338, guid: 6558360678ccb684eb2507138b3d8daf,
         type: 3}
       propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586500620500492704, guid: 6558360678ccb684eb2507138b3d8daf,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2673212166677407856, guid: 6558360678ccb684eb2507138b3d8daf,
+        type: 3}
+      propertyPath: shadowMapRenderTexture
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3483049363997840028, guid: 6558360678ccb684eb2507138b3d8daf,
@@ -8217,15 +8232,10 @@ PrefabInstance:
       propertyPath: m_Tangents.Array.data[29].z
       value: 0.7071069
       objectReference: {fileID: 0}
-    - target: {fileID: 5586500620500492704, guid: 6558360678ccb684eb2507138b3d8daf,
+    - target: {fileID: 7279717118550954604, guid: 6558360678ccb684eb2507138b3d8daf,
         type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2673212166677407856, guid: 6558360678ccb684eb2507138b3d8daf,
-        type: 3}
-      propertyPath: shadowMapRenderTexture
-      value: 
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6558360678ccb684eb2507138b3d8daf, type: 3}
@@ -8320,6 +8330,16 @@ PrefabInstance:
     - target: {fileID: 6635128033282556338, guid: 6558360678ccb684eb2507138b3d8daf,
         type: 3}
       propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586500620500492704, guid: 6558360678ccb684eb2507138b3d8daf,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2673212166677407856, guid: 6558360678ccb684eb2507138b3d8daf,
+        type: 3}
+      propertyPath: shadowMapRenderTexture
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3483049363997840028, guid: 6558360678ccb684eb2507138b3d8daf,
@@ -10197,15 +10217,10 @@ PrefabInstance:
       propertyPath: m_SelectedVertices.Array.data[23]
       value: 68
       objectReference: {fileID: 0}
-    - target: {fileID: 5586500620500492704, guid: 6558360678ccb684eb2507138b3d8daf,
+    - target: {fileID: 7279717118550954604, guid: 6558360678ccb684eb2507138b3d8daf,
         type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2673212166677407856, guid: 6558360678ccb684eb2507138b3d8daf,
-        type: 3}
-      propertyPath: shadowMapRenderTexture
-      value: 
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6558360678ccb684eb2507138b3d8daf, type: 3}
@@ -10300,6 +10315,16 @@ PrefabInstance:
     - target: {fileID: 6635128033282556338, guid: 6558360678ccb684eb2507138b3d8daf,
         type: 3}
       propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586500620500492704, guid: 6558360678ccb684eb2507138b3d8daf,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2673212166677407856, guid: 6558360678ccb684eb2507138b3d8daf,
+        type: 3}
+      propertyPath: shadowMapRenderTexture
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3483049363997840028, guid: 6558360678ccb684eb2507138b3d8daf,
@@ -12397,15 +12422,10 @@ PrefabInstance:
       propertyPath: m_SelectedVertices.Array.data[22]
       value: 44
       objectReference: {fileID: 0}
-    - target: {fileID: 5586500620500492704, guid: 6558360678ccb684eb2507138b3d8daf,
+    - target: {fileID: 7279717118550954604, guid: 6558360678ccb684eb2507138b3d8daf,
         type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2673212166677407856, guid: 6558360678ccb684eb2507138b3d8daf,
-        type: 3}
-      propertyPath: shadowMapRenderTexture
-      value: 
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6558360678ccb684eb2507138b3d8daf, type: 3}
@@ -12500,6 +12520,16 @@ PrefabInstance:
     - target: {fileID: 6635128033282556338, guid: 6558360678ccb684eb2507138b3d8daf,
         type: 3}
       propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586500620500492704, guid: 6558360678ccb684eb2507138b3d8daf,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2673212166677407856, guid: 6558360678ccb684eb2507138b3d8daf,
+        type: 3}
+      propertyPath: shadowMapRenderTexture
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3483049363997840028, guid: 6558360678ccb684eb2507138b3d8daf,
@@ -14382,15 +14412,10 @@ PrefabInstance:
       propertyPath: m_SelectedVertices.Array.data[23]
       value: 38
       objectReference: {fileID: 0}
-    - target: {fileID: 5586500620500492704, guid: 6558360678ccb684eb2507138b3d8daf,
+    - target: {fileID: 7279717118550954604, guid: 6558360678ccb684eb2507138b3d8daf,
         type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2673212166677407856, guid: 6558360678ccb684eb2507138b3d8daf,
-        type: 3}
-      propertyPath: shadowMapRenderTexture
-      value: 
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6558360678ccb684eb2507138b3d8daf, type: 3}
