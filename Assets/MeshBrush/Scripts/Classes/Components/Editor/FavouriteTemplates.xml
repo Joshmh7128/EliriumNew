@@ -6,4 +6,7 @@
   <template>
     <path>Assets/MeshBrush/Templates/Examples/Stroke Alignment Example.xml</path>
   </template>
+  <template>
+    <path>C:/Unity/Projects/Lemuria/Assets/MeshBrush/Templates/Examples/Scale Curve Example 1.xml</path>
+  </template>
 </favouriteMeshBrushTemplates>
