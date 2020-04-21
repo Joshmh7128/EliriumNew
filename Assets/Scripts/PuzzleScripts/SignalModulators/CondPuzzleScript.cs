@@ -8,27 +8,53 @@ public class CondPuzzleScript : PuzzlePartScript
     public bool collecting;
     [Tooltip("The list of puzzle objects that this Conduit activates")] public List<PuzzlePartScript> puzzleParts;
 
+    public List<int> activatedColors = new List<int>();
+
     public override void Activate(int activateColor, bool isActivated, GameObject source)
     {
         if (puzzlePartMats.Count > 0)
         {
-            foreach (PuzzlePartScript activated in puzzleParts)
-            {
-                activated.Activate(activateColor, isActivated, gameObject);
-            }
-
             if (!collecting)
             {
                 if (isActivated)
                 {
-                    SetColor(activateColor);
+                    ActivateList(activateColor, isActivated, source);
+                    if (!activatedColors.Contains(activateColor))
+                    {
+                        activatedColors.Add(activateColor);
+                    }
                 }
                 else
                 {
-                    SetColor(0);
+                    ActivateList(activateColor, false, source);
+                    if (activatedColors.Contains(activateColor))
+                    {
+                        activatedColors.Remove(activateColor);
+                        if (activatedColors.Count > 0)
+                        {
+                            ActivateList(activatedColors[0], true, source);
+                        }
+                    }
+
                 }
             }
         }
 
+    }
+
+    public void ActivateList(int activateColor, bool isActivated, GameObject source)
+    {
+        foreach (PuzzlePartScript activated in puzzleParts)
+        {
+            activated.Activate(activateColor, isActivated, gameObject);
+        }
+        if (isActivated)
+        {
+            SetColor(activateColor);
+        }
+        else
+        {
+            SetColor(0);
+        }
     }
 }
