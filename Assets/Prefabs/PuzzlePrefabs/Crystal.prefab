@@ -73,7 +73,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -806,17 +806,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c4b8d8383126604ca6bce79e0eedc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puzzlePartColor: 0
   puzzlePartMats:
   - {fileID: 2100000, guid: 02d6f4799400d76438643325faaa6d5e, type: 2}
   - {fileID: 2100000, guid: 156ae198df9d1aa419f506025884dbaf, type: 2}
   - {fileID: 2100000, guid: f5963c4df201d41489aa3d100a483104, type: 2}
   - {fileID: 2100000, guid: 1f67437d4f0e72c46bca6fe7bbd2c6a3, type: 2}
   - {fileID: 2100000, guid: dfeb1aa8d064b5348aa1ee7acbdfe79f, type: 2}
-  puzzlePartColor: 0
-  puzzlePartColorInt: 0
-  puzzlePartRend: {fileID: 0}
-  targetMat: {fileID: 0}
   lineRend: {fileID: 3307918219360728669}
+  isLens: 0
   rayLength: 20
 --- !u!120 &3307918219360728669
 LineRenderer:

@@ -104,15 +104,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6fec3cb746155c43b23900dfc21811b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puzzlePartColor: 0
   puzzlePartMats:
-  - {fileID: 2100000, guid: 254295371fd4fd34681d330ecde34ae4, type: 2}
+  - {fileID: 2100000, guid: 02d6f4799400d76438643325faaa6d5e, type: 2}
   - {fileID: 2100000, guid: c4c680929b2ae7646b875ff9bcd65dd6, type: 2}
   - {fileID: 2100000, guid: 4a5c0f68592b1ff4ca4c13fdd605dd7e, type: 2}
   - {fileID: 2100000, guid: ba915583b23b70a4b861b26898f2adf0, type: 2}
   - {fileID: 2100000, guid: 956d5198a7657c74293106edc12103c1, type: 2}
-  puzzlePartColor: 0
-  puzzlePartColorInt: 0
-  puzzlePartRend: {fileID: 0}
-  targetMat: {fileID: 0}
   collecting: 0
   puzzleParts: []
+  activatedColors: 
