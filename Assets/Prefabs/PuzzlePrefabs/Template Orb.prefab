@@ -172,11 +172,11 @@ Rigidbody:
   m_GameObject: {fileID: 4680935008535074202}
   serializedVersion: 2
   m_Mass: 5
-  m_Drag: 0
+  m_Drag: 2
   m_AngularDrag: 5
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!114 &7702757921099767004
@@ -191,16 +191,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79cff6731e87c1a42a758481bd2ff1fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puzzlePartColor: 0
   puzzlePartMats:
   - {fileID: 2100000, guid: 254295371fd4fd34681d330ecde34ae4, type: 2}
   - {fileID: 2100000, guid: c4c680929b2ae7646b875ff9bcd65dd6, type: 2}
   - {fileID: 2100000, guid: 4a5c0f68592b1ff4ca4c13fdd605dd7e, type: 2}
   - {fileID: 2100000, guid: ba915583b23b70a4b861b26898f2adf0, type: 2}
   - {fileID: 2100000, guid: 956d5198a7657c74293106edc12103c1, type: 2}
-  puzzlePartColor: 0
-  puzzlePartColorInt: 0
-  puzzlePartRend: {fileID: 0}
-  targetMat: {fileID: 0}
   holdPoint: {fileID: 0}
   orbRigidBody: {fileID: 4680935008535074200}
   startPos: {x: 0, y: 0, z: 0}

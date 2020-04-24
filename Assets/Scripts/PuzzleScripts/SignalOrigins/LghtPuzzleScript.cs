@@ -11,6 +11,7 @@ public class LghtPuzzleScript : PuzzlePartScript
     public bool isLens = false;
     private bool isActive = true;
     [Range(1,50)]public float rayLength = 15;
+    private PuzzlePartScript currentHit;
 
     private GameObject lastHit;
 
@@ -39,6 +40,7 @@ public class LghtPuzzleScript : PuzzlePartScript
                 if (hitScript != null && lightHit.transform.tag != "LightBlocker")
                 {
                     hitScript.Activate(PuzzlePartColorInt, true, gameObject);
+                    currentHit = hitScript;
                     lineRend.SetPosition(1, transform.InverseTransformPoint(lightHit.point));
                 }
                 lastHit = lightHit.transform.gameObject;
@@ -50,6 +52,7 @@ public class LghtPuzzleScript : PuzzlePartScript
                     if (lastHit.GetComponent<PuzzlePartScript>() && lastHit.tag != "LightBlocker")
                     {
                         lastHit.GetComponent<PuzzlePartScript>().Activate(PuzzlePartColorInt, false, gameObject);
+                        currentHit = null;
                     }
                     lastHit = null;
                 }
@@ -63,6 +66,7 @@ public class LghtPuzzleScript : PuzzlePartScript
                     if (lastHit.GetComponent<PuzzlePartScript>() && lastHit.tag != "LightBlocker")
                     {
                         lastHit.GetComponent<PuzzlePartScript>().Activate(PuzzlePartColorInt, false, gameObject);
+                        currentHit = null;
                     }
                     lastHit = null;
                 }
@@ -94,6 +98,18 @@ public class LghtPuzzleScript : PuzzlePartScript
                 lineRend.enabled = false;
                 isActive = false;
             }
+        }
+        else if (isActivated)
+        {
+            SetColor(activateColor);
+            if (currentHit != null)
+                currentHit.Activate(activateColor, true, gameObject);
+        }
+        else
+        {
+            SetColor((int)puzzlePartColor);
+            if (currentHit != null)
+                currentHit.Activate((int)puzzlePartColor, true, gameObject);
         }
     }
 
