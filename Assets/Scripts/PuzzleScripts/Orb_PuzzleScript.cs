@@ -36,7 +36,7 @@ public class Orb_PuzzleScript : PuzzlePartScript
         if (isHeld)
         {
             Vector3 direction = holdPoint.position - orbRigidBody.position;
-            orbRigidBody.velocity = (direction * Time.fixedDeltaTime * 1000f);
+            orbRigidBody.velocity = (direction * 20f);
         }
     }
 
