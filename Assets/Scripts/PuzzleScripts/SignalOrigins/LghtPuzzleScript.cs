@@ -9,7 +9,7 @@ public class LghtPuzzleScript : PuzzlePartScript
     RaycastHit lightHit;
     [Header("Light variables")]
     protected bool isHittingLens = false;
-    [Range(1,50)]public float rayLength = 15;
+    [Range(1,500)]public float rayLength = 15;
     private PuzzlePartScript currentHit;
 
     private GameObject lastHit;
@@ -40,7 +40,7 @@ public class LghtPuzzleScript : PuzzlePartScript
                 PuzzlePartScript hitScript = lightHit.transform.gameObject.GetComponent<PuzzlePartScript>();
                 if (hitScript != null && lightHit.transform.tag != "LightBlocker")
                 {
-                    hitScript.Activate(hitLens.LensActivate(true, lensHitPoint, transform.position + transform.forward * rayLength), true, gameObject);
+                    hitScript.Activate(hitLens.LensActivate(true, lensHitPoint, lightHit.point), true, gameObject);
                     currentHit = hitScript;
                 }
                 lastHit = lightHit.transform.gameObject;
@@ -51,10 +51,14 @@ public class LghtPuzzleScript : PuzzlePartScript
                 {
                     if (lastHit.GetComponent<PuzzlePartScript>() && lastHit.tag != "LightBlocker")
                     {
-                        lastHit.GetComponent<PuzzlePartScript>().Activate(hitLens.LensActivate(true, lensHitPoint, transform.position + transform.forward * rayLength), false, gameObject);
+                        lastHit.GetComponent<PuzzlePartScript>().Activate(hitLens.LensActivate(true, lensHitPoint, lightHit.point), false, gameObject);
                         currentHit = null;
                     }
                     lastHit = null;
+                }
+                else
+                {
+                    hitLens.LensActivate(true, lensHitPoint, lightHit.point);
                 }
 
             }
