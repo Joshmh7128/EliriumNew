@@ -8,7 +8,7 @@ public class CondPuzzleScript : PuzzlePartScript
     public bool collecting;
     [Tooltip("The list of puzzle objects that this Conduit activates")] public List<PuzzlePartScript> puzzleParts;
 
-    public List<int> activatedColors = new List<int>();
+    private List<int> activatedColors = new List<int>();
 
     public override void Activate(int activateColor, bool isActivated, GameObject source)
     {
