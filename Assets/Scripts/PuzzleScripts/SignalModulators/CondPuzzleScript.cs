@@ -14,29 +14,26 @@ public class CondPuzzleScript : PuzzlePartScript
     {
         if (puzzlePartMats.Count > 0)
         {
-            if (!collecting)
+            if (isActivated)
             {
-                if (isActivated)
+                ActivateList(activateColor, isActivated, source);
+                if (!activatedColors.Contains(activateColor))
                 {
-                    ActivateList(activateColor, isActivated, source);
-                    if (!activatedColors.Contains(activateColor))
+                    activatedColors.Add(activateColor);
+                }
+            }
+            else if (!collecting)
+            {
+                ActivateList(activateColor, false, source);
+                if (activatedColors.Contains(activateColor))
+                {
+                    activatedColors.Remove(activateColor);
+                    if (activatedColors.Count > 0)
                     {
-                        activatedColors.Add(activateColor);
+                        ActivateList(activatedColors[0], true, source);
                     }
                 }
-                else
-                {
-                    ActivateList(activateColor, false, source);
-                    if (activatedColors.Contains(activateColor))
-                    {
-                        activatedColors.Remove(activateColor);
-                        if (activatedColors.Count > 0)
-                        {
-                            ActivateList(activatedColors[0], true, source);
-                        }
-                    }
 
-                }
             }
         }
 
