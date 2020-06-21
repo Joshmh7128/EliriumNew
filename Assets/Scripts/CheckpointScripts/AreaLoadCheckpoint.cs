@@ -30,8 +30,12 @@ public class AreaLoadCheckpoint : Checkpoint
             var unloadedLevel = SceneManager.UnloadSceneAsync(unloadedScene);
             yield return unloadedLevel;
         }
-        var loadedLevel = SceneManager.LoadSceneAsync(loadedScene, LoadSceneMode.Additive);
-        yield return loadedLevel;
+
+        if (loadedScene != "")
+        {
+            var loadedLevel = SceneManager.LoadSceneAsync(loadedScene, LoadSceneMode.Additive);
+            yield return loadedLevel;
+        }
 
         manager.UpdateOrbs();
         manager.SavePlayer();
